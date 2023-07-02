@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "migrate": "prisma migrate dev --name",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/node": "^18",
+    "nuxt": "^3.6.1",
+    "nuxt-icon": "^0.4.2",
+    "prisma": "^4.16.2"
+  },
+  "dependencies": {
+    "@prisma/client": "4.16.2",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0"
+  }
+}
