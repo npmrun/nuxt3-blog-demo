@@ -1,0 +1,14 @@
+{
+  "language": {
+    "chinese": "Simpla-Chinese",
+    "english": "English"
+  },
+  "login": {
+    "email": "email",
+    "password": "password",
+    "submitBtn": "Create an account",
+    "title": "Login",
+    "validate": "Validate"
+  },
+  "welcome": "Welcome"
+}

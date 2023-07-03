@@ -9,7 +9,7 @@ const { loggedIn, user } = useUserSession()
 </script>
 
 <template>
-  <NuxtLayout name="main-layout">
-    <NuxtPage />--{{ loggedIn }}--{{ user.email }}
-  </NuxtLayout>
+    <NuxtLayout>
+        <NuxtPage />
+    </NuxtLayout>
 </template>

@@ -4,10 +4,10 @@
 
 <template>
     <Header></Header>
-    <div>
-        Some default layout shared across all pages
+    <!-- <div> -->
+        <!-- Some default layout shared across all pages -->
         <slot />
-    </div>
+    <!-- </div> -->
 </template>
 
 <style lang="scss" scoped></style>
