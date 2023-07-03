@@ -52,22 +52,18 @@ const themes = [
     'winter',
 ]
 
-// nextTick(() => {
-//     if (process.client) {
-//         useNuxtApp().$toast('notify after nextTick')
-//     }
-// })
-
-// const notify = () => {
-//     useNuxtApp().$toast.info('toastify success')
-// }
-
 const formData = reactive({
+    username: '',
     email: '',
     password: '',
+    repeatPassword: '',
 })
 async function login() {
     try {
+        if (!formData.username) {
+            useNuxtApp().$toast.error('请输入用户名')
+            return
+        }
         if (!formData.email) {
             useNuxtApp().$toast.error('请输入邮箱')
             return
@@ -76,14 +72,22 @@ async function login() {
             useNuxtApp().$toast.error('请输入密码')
             return
         }
-        await $fetch('/api/auth/login', {
+        if (!formData.repeatPassword) {
+            useNuxtApp().$toast.error('请输入重复密码')
+            return
+        }
+        await $fetch('/api/auth/register', {
             method: 'post',
             body: toRaw(formData),
         })
-        await useUserSession().fetch() // 登录 session
-        useTo(`欢迎您, ${user.value.nickname}`, '/')
+        useTo(`注册成功`, '/login')
     } catch (error: any) {
-        useNuxtApp().$toast.error(error.data.statusMessage)
+        if(error?.data?.statusMessage){
+            useNuxtApp().$toast.error(error.data.statusMessage)
+        }else{
+            useNuxtApp().$toast.error(error.message)
+        }
+        
     }
 }
 </script>
@@ -102,8 +106,20 @@ async function login() {
                         class="max-w-sm p-10 m-auto rounded shadow-xl bg-white/25"
                     >
                         <p class="mb-8 text-2xl font-light text-center">
-                            {{ $t('login.title') }}
+                            注册
                         </p>
+                        <div class="mb-2">
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    id="login-with-bg-username"
+                                    v-model="formData.username"
+                                    name="username"
+                                    class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                    placeholder="用户名"
+                                />
+                            </div>
+                        </div>
                         <div class="mb-2">
                             <div class="relative">
                                 <input
@@ -128,6 +144,18 @@ async function login() {
                                 />
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    id="login-with-bg-repeatPassword"
+                                    name="repeatPassword"
+                                    v-model="formData.repeatPassword"
+                                    class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                    placeholder="再次输入密码"
+                                />
+                            </div>
+                        </div>
                         <div class="flex items-center justify-between mt-4">
                             <button
                                 type="submit"
@@ -138,10 +166,10 @@ async function login() {
                         </div>
                         <div class="text-center">
                             <a
-                                :href="localePath('/register')"
+                                :href="localePath('/login')"
                                 class="right-0 inline-block text-sm font-light align-baseline text-500 hover:text-gray-800"
                             >
-                                {{ $t('login.register') }}
+                                {{ $t('login.toLogin') }}
                             </a>
                         </div>
                         <div class="text-right mt-2">

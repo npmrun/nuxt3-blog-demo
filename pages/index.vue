@@ -5,6 +5,14 @@ definePageMeta({
 const { locale } = useI18n()
 const { user } = useUserSession()
 const { data } = await useFetch('/api/healthz')
+const router = useRouter()
+const localePath = useLocalePath()
+
+async function handleQuit() {
+    const { clear } = useUserSession()
+    await clear()
+    useTo("退出成功", '/login')
+}
 </script>
 
 <template>
@@ -31,19 +39,11 @@ const { data } = await useFetch('/api/healthz')
         <button class="btn" data-set-theme="dark" data-act-class="ACTIVECLASS">
             dark
         </button>
-        <button
-            class="btn"
-            data-set-theme="cupcake"
-            data-act-class="ACTIVECLASS"
-        >
+        <button class="btn" data-set-theme="cupcake" data-act-class="ACTIVECLASS">
             cupcake
         </button>
-        <button
-            class="btn"
-            data-set-theme="valentine"
-            data-act-class="ACTIVECLASS"
-        >
-            valentine
+        <button class="btn" @click="handleQuit">
+            退出
         </button>
     </div>
 </template>

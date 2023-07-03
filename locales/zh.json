@@ -6,8 +6,9 @@
   "login": {
     "email": "邮箱",
     "password": "密码",
-    "submitBtn": "创建账户",
+    "register": "创建账户",
     "title": "登录",
+    "toLogin": "去登陆",
     "validate": "校验"
   },
   "welcome": "欢迎"

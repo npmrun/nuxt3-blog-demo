@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
     const prisma = event.context.prisma
     const body = await readBody(event)
 
-    const { username, email, password, repeatPassword, name } = body
+    const { username, email, password, repeatPassword } = body
 
     if (!username || !email || !password || !repeatPassword) {
         return sendError(event, createError({ statusCode: 400, statusMessage: 'Invalid params' }))

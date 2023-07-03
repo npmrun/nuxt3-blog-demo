@@ -8,7 +8,12 @@ declare module "nuxt/dist/app/nuxt" {
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(Vue3Toastify, { autoClose: 1000 })
+    // @ts-ignore
+    nuxtApp.vueApp.use(Vue3Toastify.default || Vue3Toastify, { 
+        autoClose: 1000, 
+        hideProgressBar: true, 
+        clearOnUrlChange: false 
+    })
 
     return {
         provide: { toast },

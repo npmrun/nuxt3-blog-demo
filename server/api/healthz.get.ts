@@ -6,8 +6,8 @@ const handler = eventHandler(async (event: H3Event) => {
     const prisma = event.context.prisma
     
     // https://nuxt.com/modules/session
-    console.log(event.context);
-    console.log(event.context.sessions && Object.keys(event.context.sessions));
+    // console.log(event.context);
+    // console.log(event.context.sessions && Object.keys(event.context.sessions));
     
     try {
         await prisma.$queryRaw`SELECT 1;`

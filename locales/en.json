@@ -6,8 +6,9 @@
   "login": {
     "email": "email",
     "password": "password",
-    "submitBtn": "Create an account",
+    "register": "Create an account",
     "title": "Login",
+    "toLogin": "go Login",
     "validate": "Validate"
   },
   "welcome": "Welcome"

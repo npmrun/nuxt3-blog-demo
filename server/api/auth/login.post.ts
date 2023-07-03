@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
         }))
     }
 
-    const doesThePasswordMatch = password===user.password //await bcrypt.compare(password, user.password)
+    const doesThePasswordMatch = await bcrypt.compare(password, user.password)
 
     if (!doesThePasswordMatch) {
         return sendError(event, createError({

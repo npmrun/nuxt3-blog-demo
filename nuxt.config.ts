@@ -37,7 +37,7 @@ export default defineNuxtConfig({
         ],
     },
     colorMode: {
-        preference: 'light', // default theme
+        preference: 'retro', // default theme
         dataValue: 'theme', // activate data-theme in <html> tag
         classSuffix: '',
     },
