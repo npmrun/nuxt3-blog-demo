@@ -15,10 +15,7 @@ async function handleQuit() {
 
 <template>
     <div class="">
-        <h1>登陆-{{ locale }}- {{ user }}</h1>
-        <NuxtLink v-if="!loggedIn" :to="localePath('/login')">
-            <button class="btn">登录</button>
-        </NuxtLink>
+        asda
         <button v-if="loggedIn" class="btn" @click="handleQuit">退出</button>
     </div>
 </template>

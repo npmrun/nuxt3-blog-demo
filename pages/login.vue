@@ -89,7 +89,8 @@ async function login() {
 </script>
 
 <template>
-    <div class="w-full h-screen font-sans bg-cover bg-landscape">
+    <div class="w-full h-screen font-sans bg-cover bg-landscape relative bg-base-200">
+        <!-- <Bg></Bg> -->
         <div
             class="container flex items-center justify-center flex-1 h-full mx-auto"
         >
@@ -99,7 +100,7 @@ async function login() {
                     <!-- @submit.prevent -->
                     <form
                         @submit.prevent="login"
-                        class="max-w-sm p-10 m-auto rounded shadow-xl bg-white/25"
+                        class="max-w-sm p-10 m-auto rounded-xl shadow-xl bg-white/25"
                     >
                         <p class="mb-8 text-2xl font-light text-center">
                             {{ $t('login.title') }}
@@ -152,7 +153,7 @@ async function login() {
                                 首页
                             </NuxtLink>
                         </div>
-                        <div class="text-right mt-2">
+                        <div class="flex justify-between mt-2">
                             <select
                                 id="language"
                                 class="select max-w-xs select-sm"
@@ -165,8 +166,6 @@ async function login() {
                                     {{ $t('language.english') }}
                                 </option>
                             </select>
-                        </div>
-                        <div class="text-right mt-2">
                             <select
                                 id="theme"
                                 class="select max-w-xs select-sm"
@@ -177,6 +176,9 @@ async function login() {
                                     {{ theme }}
                                 </option>
                             </select>
+                        </div>
+                        <div class="text-right mt-2">
+                            
                         </div>
                     </form>
                 </div>

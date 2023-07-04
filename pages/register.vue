@@ -93,7 +93,7 @@ async function login() {
 </script>
 
 <template>
-    <div class="w-full h-screen font-sans bg-cover bg-landscape">
+    <div class="w-full h-screen font-sans bg-cover bg-landscape bg-base-200 relative">
         <div
             class="container flex items-center justify-center flex-1 h-full mx-auto"
         >

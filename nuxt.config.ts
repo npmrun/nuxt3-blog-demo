@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     imports: {
         dirs: ['./stores'],
     },
+    css: ['~/assets/css/main.css'],
     pinia: {
         autoImports: ['defineStore', 'acceptHMRUpdate'],
     },
@@ -56,7 +57,11 @@ export default defineNuxtConfig({
     app: {
         head: {
             // https://github.com/nuxt/nuxt/discussions/16109
-            script: [{ children: 'console.log("HELLO NUXT3");' }],
+            script: [
+                { children: 'console.log("HELLO NUXT3");' },
+                { src: "https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js", body: true, defer: true },
+                { src: '/snow.js', body: true, defer: true }
+            ],
         },
     },
 })
