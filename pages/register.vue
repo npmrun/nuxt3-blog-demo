@@ -165,12 +165,12 @@ async function login() {
                             </button>
                         </div>
                         <div class="text-center">
-                            <a
-                                :href="localePath('/login')"
+                            <NuxtLink
+                                :to="localePath('/login')"
                                 class="right-0 inline-block text-sm font-light align-baseline text-500 hover:text-gray-800"
                             >
                                 {{ $t('login.toLogin') }}
-                            </a>
+                            </NuxtLink>
                         </div>
                         <div class="text-right mt-2">
                             <select

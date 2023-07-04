@@ -9,10 +9,17 @@ export default defineNuxtConfig({
     },
     modules: [
         'nuxt-icon',
+        '@pinia/nuxt',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/color-mode',
         '@nuxtjs/i18n',
     ],
+    imports: {
+        dirs: ['./stores'],
+    },
+    pinia: {
+        autoImports: ['defineStore', 'acceptHMRUpdate'],
+    },
     i18n: {
         strategy: 'prefix_except_default',
         defaultLocale: 'zh',
