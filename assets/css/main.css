@@ -5,14 +5,3 @@
 :root{
     /* @apply bg-base-200; */
 }
-/* 
-.snow {
-    filter: brightness(.8);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-} */

@@ -11,7 +11,7 @@ async function handleQuit() {
 </script>
 
 <template>
-    <div class="fixed top-0 left-0 bottom-0 w-[40%] flex justify-center bg-base-200">
+    <div class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex">
         <div class="text-center pt-[30%]">
             <div class="avatar mb-4">
                 <div class="w-24 mask mask-hexagon">
@@ -43,8 +43,7 @@ async function handleQuit() {
                         <NuxtLink :to="localePath('/login')">
                             <button class="btn btn-sm text-primary" @click="handleQuit">退出</button>
                         </NuxtLink>
-                        <button class="btn btn-sm text-primary">个人信息</button>
-                        <button class="btn btn-sm text-primary">新建文章</button>
+                        <button class="btn btn-sm text-primary">进入后台</button>
                     </template>
                 </ul>
             </div>

@@ -116,13 +116,18 @@ const SnowItem = (canvas, drawFn = null, opts) => {
     }
 }
 
-const el = document.querySelector('.container')
-const wrapper = document.querySelector('body')
-const canvas = document.getElementById('snow')
-
 const animFrame = window.requestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame
 
-Snow(canvas, 300, { color: '#bbb' })
+function initSnow() {
+    const el = document.querySelector('.container')
+    const wrapper = document.querySelector('body')
+    const canvas = document.getElementById('snow')
+    if(canvas) {
+        Snow(canvas, 300, { color: '#bbb' })
+    }
+}
+
+initSnow()
