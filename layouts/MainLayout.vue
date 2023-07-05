@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const { locale } = useI18n()
 const { user, loggedIn } = useUserSession()
 const localePath = useLocalePath()
@@ -34,20 +35,33 @@ async function handleQuit() {
                     </li>
                 </ul>
             </div>
+            <div class="mt-2 inline-grid grid-cols-2 gap-4">
+                <ChangeTheme></ChangeTheme>
+                <ChangeLanguage></ChangeLanguage>
+            </div>
             <div>
-                <ul class="mt-4 justify-center inline-grid grid-flow-row gap-1">
+                <ul class="mt-4 justify-center flex">
+                    <NuxtLink :to="localePath('/')">
+                        <button class="btn btn-sm">首页</button>
+                    </NuxtLink>
                     <NuxtLink v-if="!loggedIn" :to="localePath('/login')">
-                        <button class="btn btn-sm text-primary">登陆</button>
+                        <button class="btn btn-sm">登陆</button>
                     </NuxtLink>
                     <template v-else>
-                        <NuxtLink :to="localePath('/login')">
-                            <button class="btn btn-sm text-primary" @click="handleQuit">退出</button>
+                        <NuxtLink :to="localePath('/back')">
+                            <button class="btn btn-sm">进入后台</button>
                         </NuxtLink>
-                        <button class="btn btn-sm text-primary">进入后台</button>
+                        <NuxtLink :to="localePath('/login')">
+                            <button class="btn btn-sm" @click="handleQuit">退出</button>
+                        </NuxtLink>
                     </template>
+                    <NuxtLink :to="localePath('/about')">
+                        <button class="btn btn-sm">关于</button>
+                    </NuxtLink>
                 </ul>
             </div>
         </div>
+        <!-- <Bg></Bg> -->
         <canvas id="snow"
             class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"></canvas>
     </div>

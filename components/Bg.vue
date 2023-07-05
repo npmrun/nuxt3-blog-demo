@@ -10,13 +10,13 @@
 
 <style lang="scss" scoped>
 .bg{
-    position: fixed;
-    background-image: url(https://xieyaxin.top/bg.png);
-    background-size: 100% 100%;
+    position: absolute;
+    background-image: url(https://w.wallhaven.cc/full/28/wallhaven-28p95m.png);
+    background-size: cover;
     height: 100vh;
     left: 0;
     z-index: -1;
     right: 0;
-    filter: brightness(75%);
+    filter: brightness(80%);
 }
 </style>

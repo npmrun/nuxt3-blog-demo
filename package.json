@@ -30,11 +30,19 @@
     "vitest": "latest"
   },
   "dependencies": {
+    "@bytemd/plugin-breaks": "^1.21.0",
+    "@bytemd/plugin-frontmatter": "^1.21.0",
+    "@bytemd/plugin-gfm": "^1.21.0",
     "@pinia/nuxt": "^0.4.11",
     "@prisma/client": "4.16.2",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/bcrypt": "^5.0.0",
     "bcrypt": "^5.1.0",
+    "bytemd": "^1.21.0",
+    "h3-formidable": "^0.3.6",
+    "juejin-markdown-themes": "^1.29.7",
     "pinia": "^2.1.4",
+    "remark-directive": "^2.0.1",
     "vue3-toastify": "^0.1.11"
   }
 }
