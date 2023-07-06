@@ -49,7 +49,7 @@ const articles = computed(() => {
             </div>
         </div>
         <div class="content mx-10 my-3">
-            <div class="border rounded-xl p-4 mt-5 first:mt-0" v-for="(article, index) in articles">
+            <div class="border-2 rounded-xl p-4 mt-5 first:mt-0" v-for="(article, index) in articles">
                 <div class="text-2xl line-clamp-1 cursor-pointer">{{ article.title }}</div>
                 <div class="text-sm">{{ article.author?.nickname ?? '佚名' }}</div>
                 <div class="line-clamp-2 leading-4 mt-3 cursor-pointer">

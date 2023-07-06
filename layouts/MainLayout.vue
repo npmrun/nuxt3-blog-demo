@@ -7,7 +7,7 @@ const localePath = useLocalePath()
 async function handleQuit() {
     const { clear } = useUserSession()
     await clear()
-    useTo('退出成功', '/')
+    useTo('退出成功')
 }
 </script>
 
@@ -25,12 +25,12 @@ async function handleQuit() {
                 <ul class="mt-4 justify-center inline-grid grid-cols-2 gap-2">
                     <li title="github" class="p-1 rounded-lg cursor-pointer">
                         <a href="https://github.com/npmrun" target="_blank">
-                            <Icon name="carbon:logo-github" class="text-slate-600" size="25"></Icon>
+                            <Icon name="carbon:logo-github" size="25"></Icon>
                         </a>
                     </li>
                     <li title="blog" class="p-1 rounded-lg cursor-pointer">
                         <a href="https://blog.xieyaxin.top" target="_blank">
-                            <Icon name="carbon:book" class="text-slate-600" size="25"></Icon>
+                            <Icon name="carbon:book" size="25"></Icon>
                         </a>
                     </li>
                 </ul>
