@@ -5,6 +5,7 @@ definePageMeta({
 const { locale } = useI18n()
 const { user, loggedIn } = useUserSession()
 const localePath = useLocalePath()
+const router = useRouter()
 
 async function handleQuit() {
     const { clear } = useUserSession()
@@ -12,15 +13,15 @@ async function handleQuit() {
     useTo('退出成功', '/')
 }
 
-const { data: res } = useFetch("/api/article/articles") as any
-const articles = computed(() => {
-    if (res.value && res.value.data) {
-        return res.value.data
+const { data: articles } = useFetch("/api/article/articles", {
+    transform(input){
+        return input?.data ?? []
     }
-    return []
-})
+}) as any
 
-
+function toDetail(record: any) {
+    router.push(localePath("/article/"+record.id))
+}
 
 </script>
 
@@ -50,9 +51,9 @@ const articles = computed(() => {
         </div>
         <div class="content mx-10 my-3">
             <div class="border-2 rounded-xl p-4 mt-5 first:mt-0" v-for="(article, index) in articles">
-                <div class="text-2xl line-clamp-1 cursor-pointer">{{ article.title }}</div>
+                <div class="text-2xl line-clamp-1 cursor-pointer" @click="toDetail(article)">{{ article.title }}</div>
                 <div class="text-sm">{{ article.author?.nickname ?? '佚名' }}</div>
-                <div class="line-clamp-2 leading-4 mt-3 cursor-pointer">
+                <div class="line-clamp-2 leading-4 mt-3 cursor-pointer" @click="toDetail(article)">
                     {{ article.content }}
                 </div>
             </div>

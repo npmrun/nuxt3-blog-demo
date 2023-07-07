@@ -1,16 +1,15 @@
-import * as bcrypt from "bcrypt"
 
 export default defineEventHandler(async (event) => {
     const prisma = event.context.prisma
-    const { id } = event.context.params
-
-    if (!id) {
+    const { id } = getQuery(event)
+    
+    if (!id || isNaN(+id)) {
         return sendError(event, createError({ statusCode: 400, statusMessage: 'Invalid params' }))
     }
 
     const article = await prisma.article.findUnique({
         where: {
-            id: id
+            id: +id
         }
     })
 

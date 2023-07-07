@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
     if (!title || !content) {
         return sendError(event, createError({ statusCode: 400, statusMessage: 'Invalid params' }))
     }
-
+    //  TODO 提取文章作为描述
+    // npm markdown-description
     const articleData = {
         title,
         content,
