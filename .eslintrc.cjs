@@ -1,3 +1,6 @@
+// https://dev.to/tao/adding-eslint-and-prettier-to-nuxt-3-2023-5bg
+// https://juejin.cn/post/7201335136192364604#heading-19
+
 module.exports = {
   root: true,
   env: {
