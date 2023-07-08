@@ -1,4 +1,4 @@
-const delay = (t: number) => new Promise((r) => setTimeout(r, t));
+const delay = (t: number) => new Promise((resolve) => setTimeout(resolve, t));
 
 export const useCounter = defineStore("counter", {
 	state: () => ({
