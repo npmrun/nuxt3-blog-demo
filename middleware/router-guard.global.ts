@@ -5,28 +5,28 @@
  */
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (to.path === "/_tailwind") {
-    return true;
-  }
+	if (to.path === "/_tailwind") {
+		return true;
+	}
 
-  const { loggedIn } = useUserSession();
-  const AuthPages = ["/login", "/register", "/en/login", "/en/register"];
+	const { loggedIn } = useUserSession();
+	const AuthPages = ["/login", "/register", "/en/login", "/en/register"];
 
-  if (loggedIn.value && AuthPages.includes(to.path)) {
-    return navigateTo("/");
-  }
+	if (loggedIn.value && AuthPages.includes(to.path)) {
+		return navigateTo("/");
+	}
 
-  // if (to.fullPath === '/infors') {
-  //     // 重定向
-  //     return navigateTo('/applyCode')
-  // }
-  // if (to.fullPath === '/login') {
-  //     // 停止当前导航
-  //     return abortNavigation('禁止进入页面')
-  //     return abortNavigation()
-  // }
-  // if (to.fullPath === '/comePay/comePay') {
-  //     // 拒绝当前导航并出现错误
-  //     return abortNavigation('禁止进入页面')
-  // }
+	// if (to.fullPath === '/infors') {
+	//     // 重定向
+	//     return navigateTo('/applyCode')
+	// }
+	// if (to.fullPath === '/login') {
+	//     // 停止当前导航
+	//     return abortNavigation('禁止进入页面')
+	//     return abortNavigation()
+	// }
+	// if (to.fullPath === '/comePay/comePay') {
+	//     // 拒绝当前导航并出现错误
+	//     return abortNavigation('禁止进入页面')
+	// }
 });

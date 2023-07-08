@@ -5,19 +5,22 @@ import * as path from "path";
 import { readFiles } from "h3-formidable";
 
 export default defineEventHandler(async (event) => {
-  const {
-    files: {
-      photo: [{ filepath, mimetype }],
-    },
-    fields,
-  } = await readFiles(event, {
-    includeFields: true,
-  });
-  console.log(filepath);
+	const {
+		files: {
+			photo: [{ filepath, mimetype }],
+		},
+		fields,
+	} = await readFiles(event, {
+		includeFields: true,
+	});
+	console.log(filepath);
 
-  const imageName = String(Date.now()) + String(Math.round(Math.random() * 10000000));
-  const newPath = `${path.join("public", "uploads", imageName)}.${mimetype.split("/")[1]}`;
-  fs.copyFileSync(filepath, newPath);
-  // TODO 会产生临时文件，记得处理删除
-  return { success: true };
+	const imageName =
+		String(Date.now()) + String(Math.round(Math.random() * 10000000));
+	const newPath = `${path.join("public", "uploads", imageName)}.${
+		mimetype.split("/")[1]
+	}`;
+	fs.copyFileSync(filepath, newPath);
+	// TODO 会产生临时文件，记得处理删除
+	return { success: true };
 });

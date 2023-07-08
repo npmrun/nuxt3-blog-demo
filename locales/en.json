@@ -1,15 +1,15 @@
 {
-  "language": {
-    "chinese": "Simpla-Chinese",
-    "english": "English"
-  },
-  "login": {
-    "email": "email",
-    "password": "password",
-    "register": "Create an account",
-    "title": "Login",
-    "toLogin": "go Login",
-    "validate": "Validate"
-  },
-  "welcome": "Welcome"
+	"language": {
+		"chinese": "Simpla-Chinese",
+		"english": "English"
+	},
+	"login": {
+		"email": "email",
+		"password": "password",
+		"register": "Create an account",
+		"title": "Login",
+		"toLogin": "go Login",
+		"validate": "Validate"
+	},
+	"welcome": "Welcome"
 }

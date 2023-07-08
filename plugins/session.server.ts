@@ -1,7 +1,7 @@
 export default defineNuxtPlugin({
-  name: "session-fetch-plugin",
-  enforce: "pre",
-  async setup() {
-    await useUserSession().fetch();
-  },
+	name: "session-fetch-plugin",
+	enforce: "pre",
+	async setup() {
+		await useUserSession().fetch();
+	},
 });

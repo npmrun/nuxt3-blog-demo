@@ -1,15 +1,15 @@
 {
-  "language": {
-    "chinese": "简体中文",
-    "english": "英文"
-  },
-  "login": {
-    "email": "邮箱",
-    "password": "密码",
-    "register": "创建账户",
-    "title": "登录",
-    "toLogin": "去登陆",
-    "validate": "校验"
-  },
-  "welcome": "欢迎"
+	"language": {
+		"chinese": "简体中文",
+		"english": "英文"
+	},
+	"login": {
+		"email": "邮箱",
+		"password": "密码",
+		"register": "创建账户",
+		"title": "登录",
+		"toLogin": "去登陆",
+		"validate": "校验"
+	},
+	"welcome": "欢迎"
 }

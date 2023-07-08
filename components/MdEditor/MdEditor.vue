@@ -7,32 +7,35 @@ import collectPlugin from "./plugins/collectPlugin";
 import { Editor as MdEditor, Viewer } from ".";
 
 const ppp: any = {
-  viewerEffect({ markdownBody }: any) {
-    const links = markdownBody.querySelectorAll("a");
-    links.forEach((link: any) => {
-      link.setAttribute("target", "_blank");
-      // @ts-ignore
-      link.onclick = window.setURL;
-      link.oncontextmenu = function () {};
-      link.setAttribute("ahref", link.getAttribute("href"));
-      link.removeAttribute("href");
-    });
-  },
+	viewerEffect({ markdownBody }: any) {
+		const links = markdownBody.querySelectorAll("a");
+		links.forEach((link: any) => {
+			link.setAttribute("target", "_blank");
+			// @ts-ignore
+			link.onclick = window.setURL;
+			link.oncontextmenu = function () {};
+			link.setAttribute("ahref", link.getAttribute("href"));
+			link.removeAttribute("href");
+		});
+	},
 };
 
 onMounted(() => {
-  document.querySelector(".markdown-body")?.classList.add("content");
+	document.querySelector(".markdown-body")?.classList.add("content");
 });
 </script>
 
 <template>
-  <MdEditor :plugins="[gfm(), frontmatter(), btybreaks(), ppp, collectPlugin()]" :locale="zhHans">
-  </MdEditor>
+	<MdEditor
+		:plugins="[gfm(), frontmatter(), btybreaks(), ppp, collectPlugin()]"
+		:locale="zhHans"
+	>
+	</MdEditor>
 </template>
 
 <style lang="scss" scoped>
 :deep(.bytemd) {
-  height: 100%;
+	height: 100%;
 }
 // .doc-card {
 //     display: inline-block;

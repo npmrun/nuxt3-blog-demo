@@ -5,30 +5,30 @@ import btybreaks from "@bytemd/plugin-breaks";
 import zhHans from "bytemd/locales/zh_Hans.json";
 import { Viewer } from "@/components/MdEditor";
 definePageMeta({
-  layout: "main-layout",
+	layout: "main-layout",
 });
 const route = useRoute();
 const router = useRouter();
 
 const { data: res } = useFetch("/api/article/article", {
-  method: "GET",
-  query: {
-    id: route.params.id,
-  },
+	method: "GET",
+	query: {
+		id: route.params.id,
+	},
 });
 
 const article = computed(() => {
-  return res.value?.data;
+	return res.value?.data;
 });
 </script>
 
 <template>
-  <div class="m-5">
-    <p class="cursor-pointer" @click="router.back()">返回</p>
-    <Viewer
-      :plugins="[gfm(), frontmatter(), btybreaks()]"
-      :locale="zhHans"
-      :value="article?.content"
-    ></Viewer>
-  </div>
+	<div class="m-5">
+		<p class="cursor-pointer" @click="router.back()">返回</p>
+		<Viewer
+			:plugins="[gfm(), frontmatter(), btybreaks()]"
+			:locale="zhHans"
+			:value="article?.content"
+		></Viewer>
+	</div>
 </template>
