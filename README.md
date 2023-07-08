@@ -77,23 +77,23 @@ https://github.com/Atinux/nuxt-todos-edge/blob/main/server/api/auth/github.get.t
 Migrate to Bridge: Overview
 https://nuxt.com/blog/v3-6
 
-Nuxt 中文站 - 易懂的Web框架 Nuxt3文档
+Nuxt 中文站 - 易懂的 Web 框架 Nuxt3 文档
 https://nuxt.com.cn/
 
 Nuxt3 实战全栈开发简书 - 视频课 - TeHub
 https://tehub.com/course/bIpRGyDdBh?from=nuxt.com.cn
 
-03技术史-世间安得双全法？又快又稳Prisma！_哔哩哔哩_bilibili
+03 技术史-世间安得双全法？又快又稳 Prisma！\_哔哩哔哩\_bilibili
 https://www.bilibili.com/video/BV1um4y117nB/?share_source=copy_web&vd_source=f8709d15baaa835ea2d0bb3bcc6857da
 
-【Twitter克隆实战】使用Nuxt 3, TailwindCSS和Prisma 构建和部署一个完整的社交媒体应用程序（YouTube 中英字幕）_哔哩哔哩_bilibili
+【Twitter 克隆实战】使用 Nuxt 3, TailwindCSS 和 Prisma 构建和部署一个完整的社交媒体应用程序（YouTube 中英字幕）\_哔哩哔哩\_bilibili
 https://www.bilibili.com/video/BV1714y1v7of/?spm_id_from=333.337.search-card.all.click&vd_source=f0355c9964400f6a5d6a300cc1ba5954
 
 twitter-clone/pages/status/[id].vue at master · insidewebdev/twitter-clone
 https://github.com/insidewebdev/twitter-clone/blob/master/pages/status/%5Bid%5D.vue
 
 tailwind-config-viewer
-http://localhost:3000/_tailwind/#Spacing
+http://localhost:3000/\_tailwind/#Spacing
 
 Icônes
 https://icones.js.org/collection/carbon
@@ -113,13 +113,13 @@ https://github.com/search?q=nuxt3+blog&type=repositories&s=stars&o=desc
 nuxt-3-notion-blog/store/articles.js at main · egrzeszczak/nuxt-3-notion-blog · GitHub
 https://github.com/egrzeszczak/nuxt-3-notion-blog/blob/main/store/articles.js
 
-django什么时候需要migration - 搜索
+django 什么时候需要 migration - 搜索
 https://www.bing.com/search?q=django%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81migration&qs=n&form=QBRE&sp=-1&lq=0&pq=django%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99xu+yao&sc=9-16&sk=&cvid=8B00C853F6A94A85903F43FE6E04803E&ghsh=0&ghacc=0&ghpl=
 
 Routing · Nitro
 https://nitro.unjs.io/guide/routing
 
-Nuxt3API与服务器中间件 - 掘金
+Nuxt3API 与服务器中间件 - 掘金
 https://juejin.cn/post/7036754116982341646
 
 ChatGPT

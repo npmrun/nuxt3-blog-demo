@@ -1,24 +1,23 @@
-
 export default defineEventHandler(async (event) => {
-    const prisma = event.context.prisma
-    const { id } = getQuery(event)
-    
-    if (!id || isNaN(+id)) {
-        return sendError(event, createError({ statusCode: 400, statusMessage: 'Invalid params' }))
-    }
+  const prisma = event.context.prisma;
+  const { id } = getQuery(event);
 
-    const article = await prisma.article.findUnique({
-        where: {
-            id: +id
-        }
-    })
+  if (!id || isNaN(+id)) {
+    return sendError(event, createError({ statusCode: 400, statusMessage: "Invalid params" }));
+  }
 
-    if(!article){
-        return sendError(event, createError({ statusCode: 400, statusMessage: '不存在该文章' }))
-    }
+  const article = await prisma.article.findUnique({
+    where: {
+      id: +id,
+    },
+  });
 
-    return {
-        statusCode: 200,
-        data: article
-    }
-})
+  if (!article) {
+    return sendError(event, createError({ statusCode: 400, statusMessage: "不存在该文章" }));
+  }
+
+  return {
+    statusCode: 200,
+    data: article,
+  };
+});
