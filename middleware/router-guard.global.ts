@@ -16,6 +16,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
 		return navigateTo("/");
 	}
 
+	if (!loggedIn.value && to.path.startsWith("/back")) {
+		return navigateTo("/");
+	}
+
 	// if (to.fullPath === '/infors') {
 	//     // 重定向
 	//     return navigateTo('/applyCode')

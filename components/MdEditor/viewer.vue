@@ -1,10 +1,5 @@
 <template>
-	<div
-		ref="markdownBody"
-		className="markdown-body"
-		@click="handleClick"
-		v-html="file.toString()"
-	></div>
+	<div ref="markdownBody" className="markdown-body" @click="handleClick" v-html="file.toString()"></div>
 </template>
 
 <script lang="ts">

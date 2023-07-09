@@ -1,11 +1,16 @@
-import * as bcrypt from "bcrypt";
+/**
+ * 发布与修改文章
+ * @权限 登录用户可发布自己的文章，只能修改自己的文章
+ */
+
+import matter from "gray-matter";
 
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
 	const { user } = await requireUserSession(event);
 	const body = await readBody(event);
 
-	const { title, content, published } = body;
+	const { title, content, published, id } = body;
 
 	if (!title || !content) {
 		return sendError(
@@ -13,27 +18,33 @@ export default defineEventHandler(async (event) => {
 			createError({ statusCode: 400, statusMessage: "Invalid params" })
 		);
 	}
-	//  TODO 提取文章作为描述
-	// npm markdown-description
+	const parseMD = matter(content)
+	const desc = parseMD.data.desc ?? getMarkdownDescription(parseMD.content) ?? undefined
+
 	const articleData = {
 		title,
 		content,
 		published,
+		desc: desc ?? undefined,
 		authorId: user.id,
 	};
-	await prisma.article.update({
-		where: {
-			id: 1,
-			authorId: 1,
-		},
-		data: articleData,
-	});
-	const articles = await prisma.article.create({
-		data: articleData,
-	});
+	let article: any = undefined
+	if (!id) {
+		article = await prisma.article.create({
+			data: articleData,
+		});
+	} else {
+		article = await prisma.article.update({
+			where: {
+				id: id,
+				authorId: user.id
+			},
+			data: articleData,
+		});
+	}
 
 	return {
 		statusCode: 200,
-		data: articles,
+		data: article,
 	};
 });

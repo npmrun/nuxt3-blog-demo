@@ -8,12 +8,12 @@ async function handleQuit() {
 	await clear();
 	useTo("退出成功");
 }
+
+
 </script>
 
 <template>
-	<div
-		class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex"
-	>
+	<div class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex">
 		<div class="text-center pt-[30%]">
 			<div class="avatar mb-4">
 				<div class="w-24 mask mask-hexagon">
@@ -21,7 +21,7 @@ async function handleQuit() {
 				</div>
 			</div>
 			<h1 class="text-5xl font-bold">YSir</h1>
-			<p class="mt-2">不知明天是否安在，想要一场美丽的邂逅</p>
+			<p class="mt-2">生活都在过去，现在与未来只需静心</p>
 			<div>
 				<ul class="mt-4 justify-center inline-grid grid-cols-2 gap-2">
 					<li title="github" class="p-1 rounded-lg cursor-pointer">
@@ -42,35 +42,36 @@ async function handleQuit() {
 			</div>
 			<div>
 				<ul class="mt-4 justify-center flex">
-					<NuxtLink :to="localePath('/')">
-						<button class="btn btn-sm">首页</button>
-					</NuxtLink>
-					<NuxtLink v-if="!loggedIn" :to="localePath('/login')">
-						<button class="btn btn-sm">登陆</button>
-					</NuxtLink>
-					<template v-else>
+					<template v-if="loggedIn">
+						<NuxtLink :to="localePath('/')">
+							<button class="btn btn-sm">首页</button>
+						</NuxtLink>
 						<NuxtLink :to="localePath('/back')">
 							<button class="btn btn-sm">进入后台</button>
 						</NuxtLink>
-						<NuxtLink :to="localePath('/login')">
-							<button class="btn btn-sm" @click="handleQuit">
-								退出
-							</button>
+						<NuxtLink :to="localePath('/about')">
+							<button class="btn btn-sm">关于</button>
+						</NuxtLink>
+						<button class="btn btn-sm" @click="handleQuit">
+							退出
+						</button>
+					</template>
+					<template v-else>
+						<NuxtLink :to="localePath('/')">
+							<button class="btn btn-sm">首页</button>
+						</NuxtLink>
+						<NuxtLink v-if="!loggedIn" :to="localePath('/login')">
+							<button class="btn btn-sm">登陆</button>
 						</NuxtLink>
 					</template>
-					<NuxtLink :to="localePath('/about')">
-						<button class="btn btn-sm">关于</button>
-					</NuxtLink>
 				</ul>
 			</div>
 		</div>
 		<!-- <Bg></Bg> -->
-		<canvas
-			id="snow"
-			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"
-		></canvas>
+		<canvas id="snow"
+			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"></canvas>
 	</div>
-	<main class="ml-[40%]">
+	<main class="ml-[40%] wrap-outer">
 		<slot />
 	</main>
 </template>

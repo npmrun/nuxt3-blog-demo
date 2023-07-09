@@ -17,6 +17,16 @@ export default defineNuxtConfig({
 	imports: {
 		dirs: ["./stores"],
 	},
+	// 做成静态站点需要将动态路由静态化
+	// https://nuxt.com/docs/api/configuration/nuxt-config#generate
+	nitro: {
+		prerender: {
+			routes: ["/article/20"]
+		}
+	},
+	experimental: {
+		payloadExtraction: false
+	},
 	css: ["~/assets/css/main.css"],
 	pinia: {
 		autoImports: ["defineStore", "acceptHMRUpdate"],
@@ -45,7 +55,7 @@ export default defineNuxtConfig({
 		],
 	},
 	colorMode: {
-		preference: "retro", // default theme
+		preference: "winter", // default theme
 		dataValue: "theme", // activate data-theme in <html> tag
 		classSuffix: "",
 	},
@@ -55,16 +65,11 @@ export default defineNuxtConfig({
 		strict: true,
 	},
 	app: {
+		buildAssetsDir: "static",
 		head: {
 			// https://github.com/nuxt/nuxt/discussions/16109
 			script: [
-				{ children: 'console.log("HELLO NUXT3");' },
-				{
-					src: "https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js",
-					body: true,
-					defer: true,
-				},
-				{ src: "/snow.js", body: true, defer: true },
+				{ children: 'console.log("HELLO NUXT3");' }
 			],
 		},
 	},

@@ -21,7 +21,7 @@ const ppp: any = {
 };
 
 onMounted(() => {
-	document.querySelector(".markdown-body")?.classList.add("content");
+	// document.querySelector(".markdown-body")?.classList.add("prose");
 });
 </script>
 

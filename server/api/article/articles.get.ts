@@ -1,3 +1,8 @@
+/**
+ * 获取文章列表
+ * @权限 所有用户可查，未登录可查
+ */
+
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
 

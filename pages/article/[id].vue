@@ -24,11 +24,14 @@ const article = computed(() => {
 
 <template>
 	<div class="m-5">
-		<p class="cursor-pointer" @click="router.back()">返回</p>
-		<Viewer
-			:plugins="[gfm(), frontmatter(), btybreaks()]"
-			:locale="zhHans"
-			:value="article?.content"
-		></Viewer>
+		<div class="text-sm breadcrumbs">
+			<ul>
+				<li>
+					<NuxtLink :to="getLocalePath('/')">首页</NuxtLink>
+				</li>
+				<li>{{ article?.title ?? "加载中" }}</li>
+			</ul>
+		</div>
+		<Viewer :plugins="[gfm(), frontmatter(), btybreaks()]" :locale="zhHans" :value="article?.content"></Viewer>
 	</div>
 </template>
