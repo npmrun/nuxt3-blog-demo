@@ -37,4 +37,6 @@ model Article {
   published Boolean @default(false)
   author    User    @relation(fields: [authorId], references: [id])
   authorId  Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }

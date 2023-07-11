@@ -24,6 +24,15 @@ export async function clearUserSession(event: H3Event) {
 	return true;
 }
 
+export async function isUserLogin(event: H3Event) {
+	const userSession = await getUserSession(event);
+
+	if (!userSession?.user) {
+		return false
+	}
+	return true
+}
+
 export async function requireUserSession(event: H3Event) {
 	const userSession = await getUserSession(event);
 

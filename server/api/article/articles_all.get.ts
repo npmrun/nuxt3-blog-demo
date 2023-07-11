@@ -6,12 +6,11 @@
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
 
+	await requireUserSession(event)
 	const { pageNum, pageSize } = getQuery(event) as { pageSize: number, pageNum: number };
 
+
 	const articles = await prisma.article.findMany({
-		where: {
-			published: true,
-		},
 		orderBy: {
 			updatedAt: "desc"
 		},
@@ -28,11 +27,7 @@ export default defineEventHandler(async (event) => {
 		},
 	});
 
-	const total = await prisma.article.count({
-		where: {
-			published: true,
-		}
-	})
+	const total = await prisma.article.count()
 
 	return {
 		statusCode: 200,

@@ -3,23 +3,50 @@ definePageMeta({
 	layout: "admin-layout",
 });
 
-const { data: articles } = useFetch("/api/article/articles", {
-	transform(input) {
-		return input?.data ?? [];
+const pageQuery = ref({
+	pageNum: 1,
+	pageSize: 10,
+})
+
+const { data: articlesData } = useFetch("/api/article/articles_all", {
+	query: pageQuery,
+	default() {
+		return {
+			total: 0,
+			list: [],
+		}
 	},
+	transform(input: any) {
+		return {
+			total: input?.total ?? 0,
+			list: input?.data ?? []
+		};
+	}
 }) as any;
 
 const router = useRouter()
 function handleEdit(data: any) {
 	router.push('/back/add?id=' + data.id)
 }
+
+const allCount = computed(() => {
+	return Math.ceil(articlesData.value.total / pageQuery.value.pageSize)
+})
 </script>
 <template>
 	<div class="m-10">
 		<div>
 			<button class="btn" @click="$router.push('/back/add')">新建文章</button>
-			<ArticleItem v-for="(article, index) in articles" :key="index" :article="article" @click-detail="handleEdit">
+			<ArticleItem v-for="(article, index) in articlesData.list" :key="index" :article="article"
+				@click-detail="handleEdit">
 			</ArticleItem>
+			<div class="flex justify-center mt-6 mb-6">
+				<div class="join">
+					<button v-for="item in allCount" class="join-item btn"
+						:class="[pageQuery.pageNum === item ? 'btn-active' : '']" @click="pageQuery.pageNum = item">{{ item
+						}}</button>
+				</div>
+			</div>
 		</div>
 
 	</div>
