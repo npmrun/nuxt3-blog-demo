@@ -12,10 +12,20 @@ const emit = defineEmits<{
         <div class="text-2xl line-clamp-1 cursor-pointer" @click="() => emit('clickDetail', article)">
             {{ article.title }}
         </div>
-        <div class="text-sm">
-            {{ article.author?.nickname ?? "佚名" }}
+        <div class="text-sm mt-2" v-if="article.createdAt">
+            <span>
+                创建于：{{ dateTimeFormat(article.createdAt) }}
+            </span>
+            <span class="ml-5" v-if="article.updatedAt">
+                更新于：{{ dateTimeFormat(article.updatedAt) }}
+            </span>
         </div>
-        <div class="line-clamp-2 leading-4 mt-3 cursor-pointer" @click="() => emit('clickDetail', article)">
+        <div class="text-sm mt-2 px-2 py-1 bg-base-300 inline-block rounded-xl">
+            <span>
+                作者：{{ article.author?.nickname ?? "佚名" }}
+            </span>
+        </div>
+        <div class="line-clamp-2 leading-4 mt-3 cursor-pointer opacity-60" @click="() => emit('clickDetail', article)">
             {{ article.desc }}
         </div>
     </div>

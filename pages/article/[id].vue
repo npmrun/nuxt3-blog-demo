@@ -23,7 +23,7 @@ const article = computed(() => {
 </script>
 
 <template>
-	<div class="m-5">
+	<div class="mx-5 my-2">
 		<div class="text-sm breadcrumbs">
 			<ul>
 				<li>

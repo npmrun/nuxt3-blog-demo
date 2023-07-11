@@ -43,23 +43,14 @@ async function handleQuit() {
 			<div>
 				<ul class="mt-4 justify-center flex">
 					<template v-if="loggedIn">
-						<NuxtLink :to="localePath('/')">
-							<button class="btn btn-sm">首页</button>
-						</NuxtLink>
 						<NuxtLink :to="localePath('/back')">
 							<button class="btn btn-sm">进入后台</button>
-						</NuxtLink>
-						<NuxtLink :to="localePath('/about')">
-							<button class="btn btn-sm">关于</button>
 						</NuxtLink>
 						<button class="btn btn-sm" @click="handleQuit">
 							退出
 						</button>
 					</template>
 					<template v-else>
-						<NuxtLink :to="localePath('/')">
-							<button class="btn btn-sm">首页</button>
-						</NuxtLink>
 						<NuxtLink v-if="!loggedIn" :to="localePath('/login')">
 							<button class="btn btn-sm">登陆</button>
 						</NuxtLink>
@@ -72,8 +63,20 @@ async function handleQuit() {
 			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"></canvas>
 	</div>
 	<main class="ml-[40%] wrap-outer">
+		<div class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10">
+			<NuxtLink to="/" class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
+				首页
+			</NuxtLink>
+			<NuxtLink to="/about" class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
+				关于
+			</NuxtLink>
+		</div>
 		<slot />
 	</main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.router-link-active {
+	@apply bg-base-200;
+}
+</style>
