@@ -28,7 +28,7 @@ const emit = defineEmits<{
 			<span> 作者：{{ article.author?.nickname ?? "佚名" }} </span>
 		</div>
 		<div
-			class="line-clamp-2 leading-4 mt-3 cursor-pointer opacity-60"
+			class="line-clamp-2 leading-4 mt-3 cursor-pointer text-[#8895a6]"
 			@click="() => emit('clickDetail', article)"
 		>
 			{{ article.desc }}

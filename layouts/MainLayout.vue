@@ -66,7 +66,7 @@ async function handleQuit() {
 	</div>
 	<main class="ml-[40%] wrap-outer">
 		<div
-			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10"
+			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-1"
 		>
 			<NuxtLink
 				to="/"

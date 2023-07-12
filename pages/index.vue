@@ -56,7 +56,7 @@ const allCount = computed(() => {
 </script>
 
 <template>
-	<div class="min-h-screen overflow-hidden">
+	<div class="">
 		<ArticleItem
 			v-for="(article, index) in articleData.list"
 			:key="index"
