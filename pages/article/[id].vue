@@ -8,17 +8,16 @@ definePageMeta({
 	layout: "main-layout",
 });
 const route = useRoute();
-const router = useRouter();
+const { loggedIn } = useUserSession();
 
-const { data: res } = useFetch("/api/article/article", {
+const { data: article } = useFetch("/api/article/article", {
 	method: "GET",
 	query: {
 		id: route.params.id,
 	},
-});
-
-const article = computed(() => {
-	return res.value?.data;
+	transform(input: any) {
+		return input?.data;
+	},
 });
 </script>
 
@@ -32,6 +31,9 @@ const article = computed(() => {
 				<li>{{ article?.title ?? "加载中" }}</li>
 			</ul>
 		</div>
+		<NuxtLink v-if="loggedIn" :to="`/back/add?id=${route.params.id}`">
+			<button class="btn">编辑</button>
+		</NuxtLink>
 		<Viewer
 			:plugins="[gfm(), frontmatter(), btybreaks()]"
 			:locale="zhHans"
