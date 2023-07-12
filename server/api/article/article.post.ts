@@ -18,8 +18,11 @@ export default defineEventHandler(async (event) => {
 			createError({ statusCode: 400, statusMessage: "Invalid params" })
 		);
 	}
-	const parseMD = matter(content)
-	const desc = parseMD.data.desc ?? getMarkdownDescription(parseMD.content) ?? undefined
+	const parseMD = matter(content);
+	const desc =
+		parseMD.data.desc ??
+		getMarkdownDescription(parseMD.content) ??
+		undefined;
 
 	const articleData = {
 		title,
@@ -28,7 +31,7 @@ export default defineEventHandler(async (event) => {
 		desc: desc ?? undefined,
 		authorId: user.id,
 	};
-	let article: any = undefined
+	let article: any;
 	if (!id) {
 		article = await prisma.article.create({
 			data: articleData,
@@ -36,8 +39,8 @@ export default defineEventHandler(async (event) => {
 	} else {
 		article = await prisma.article.update({
 			where: {
-				id: id,
-				authorId: user.id
+				id,
+				authorId: user.id,
 			},
 			data: articleData,
 		});

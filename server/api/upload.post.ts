@@ -17,12 +17,13 @@ export default defineEventHandler(async (event) => {
 
 	const imageName =
 		String(Date.now()) + String(Math.round(Math.random() * 10000000));
-	const newPath = `${path.join("public", "uploads", imageName)}.${mimetype.split("/")[1]
-		}`;
+	const newPath = `${path.join("public", "uploads", imageName)}.${
+		mimetype.split("/")[1]
+	}`;
 	fs.copyFileSync(filepath, newPath);
 	// TODO 会产生临时文件，记得处理删除
 	try {
-		fs.unlinkSync(filepath)
+		fs.unlinkSync(filepath);
 	} catch (error) {
 		console.error("临时文件删除失败，请知悉错误：");
 		console.error(error);

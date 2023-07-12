@@ -1,3 +1,3 @@
 export default defineEventHandler(async (event) => {
-    return await requireUserSession(event);
+	return await requireUserSession(event);
 });

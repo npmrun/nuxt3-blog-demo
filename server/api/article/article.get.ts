@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
 			title: true,
 			desc: true,
 			published: true,
-		}
+		},
 	});
 
 	if (!article) {

@@ -32,6 +32,10 @@ const article = computed(() => {
 				<li>{{ article?.title ?? "加载中" }}</li>
 			</ul>
 		</div>
-		<Viewer :plugins="[gfm(), frontmatter(), btybreaks()]" :locale="zhHans" :value="article?.content"></Viewer>
+		<Viewer
+			:plugins="[gfm(), frontmatter(), btybreaks()]"
+			:locale="zhHans"
+			:value="article?.content"
+		></Viewer>
 	</div>
 </template>

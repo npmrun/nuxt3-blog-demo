@@ -8,12 +8,12 @@ async function handleQuit() {
 	await clear();
 	useTo("退出成功");
 }
-
-
 </script>
 
 <template>
-	<div class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex">
+	<div
+		class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex"
+	>
 		<div class="text-center pt-[30%]">
 			<div class="avatar mb-4">
 				<div class="w-24 mask mask-hexagon">
@@ -59,15 +59,25 @@ async function handleQuit() {
 			</div>
 		</div>
 		<!-- <Bg></Bg> -->
-		<canvas id="snow"
-			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"></canvas>
+		<canvas
+			id="snow"
+			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"
+		></canvas>
 	</div>
 	<main class="ml-[40%] wrap-outer">
-		<div class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10">
-			<NuxtLink to="/" class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
+		<div
+			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10"
+		>
+			<NuxtLink
+				to="/"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+			>
 				首页
 			</NuxtLink>
-			<NuxtLink to="/about" class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
+			<NuxtLink
+				to="/about"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+			>
 				关于
 			</NuxtLink>
 		</div>

@@ -6,16 +6,18 @@
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
 
-	await requireUserSession(event)
-	const { pageNum, pageSize } = getQuery(event) as { pageSize: number, pageNum: number };
-
+	await requireUserSession(event);
+	const { pageNum, pageSize } = getQuery(event) as {
+		pageSize: number;
+		pageNum: number;
+	};
 
 	const articles = await prisma.article.findMany({
 		orderBy: {
-			updatedAt: "desc"
+			updatedAt: "desc",
 		},
 		take: +pageSize || undefined,
-		skip: ((pageNum && (pageNum - 1)) ?? 0) * (pageSize ?? 0),
+		skip: ((pageNum && pageNum - 1) ?? 0) * (pageSize ?? 0),
 		include: {
 			author: {
 				select: {
@@ -27,11 +29,11 @@ export default defineEventHandler(async (event) => {
 		},
 	});
 
-	const total = await prisma.article.count()
+	const total = await prisma.article.count();
 
 	return {
 		statusCode: 200,
-		total: total,
+		total,
 		data: articles,
 	};
 });

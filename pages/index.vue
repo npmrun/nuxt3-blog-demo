@@ -17,15 +17,18 @@ async function handleQuit() {
 const pageQuery = ref({
 	pageNum: 1,
 	pageSize: 10,
-})
+});
 watchEffect(() => {
 	if (route.query.page) {
-		pageQuery.value.pageNum = +route.query.page ?? 1
+		pageQuery.value.pageNum = +route.query.page ?? 1;
 	}
-})
-watch(() => pageQuery.value.pageNum, () => {
-	router.replace({ query: { page: pageQuery.value.pageNum } })
-})
+});
+watch(
+	() => pageQuery.value.pageNum,
+	() => {
+		router.replace({ query: { page: pageQuery.value.pageNum } });
+	}
+);
 
 const { data: articleData } = useFetch("/api/article/articles", {
 	query: pageQuery,
@@ -33,14 +36,14 @@ const { data: articleData } = useFetch("/api/article/articles", {
 		return {
 			total: 0,
 			list: [],
-		}
+		};
 	},
 	transform(input: any) {
 		return {
 			total: input?.total ?? 0,
-			list: input?.data ?? []
+			list: input?.data ?? [],
 		};
-	}
+	},
 }) as any;
 
 function toDetail(record: any) {
@@ -48,18 +51,30 @@ function toDetail(record: any) {
 }
 
 const allCount = computed(() => {
-	return Math.ceil(articleData.value.total / pageQuery.value.pageSize)
-})
+	return Math.ceil(articleData.value.total / pageQuery.value.pageSize);
+});
 </script>
 
 <template>
 	<div class="min-h-screen overflow-hidden">
-		<ArticleItem v-for="(article, index) in articleData.list" :key="index" :article="article" @click-detail="toDetail">
+		<ArticleItem
+			v-for="(article, index) in articleData.list"
+			:key="index"
+			:article="article"
+			@click-detail="toDetail"
+		>
 		</ArticleItem>
 		<div class="flex justify-center mt-6 mb-6">
 			<div class="join">
-				<button v-for="item in allCount" class="join-item btn" :class="[pageQuery.pageNum === item ? 'btn-active' : '']"
-					@click="pageQuery.pageNum = item">{{ item }}</button>
+				<button
+					v-for="item in allCount"
+					:key="item"
+					class="join-item btn"
+					:class="[pageQuery.pageNum === item ? 'btn-active' : '']"
+					@click="pageQuery.pageNum = item"
+				>
+					{{ item }}
+				</button>
 			</div>
 		</div>
 		<!-- <picture>

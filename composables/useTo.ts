@@ -8,7 +8,7 @@ export const useTo = (toast: string, path?: string) => {
 };
 export const getLocalePath = (path: string) => {
 	const localePath = useLocalePath();
-	return localePath(path)
+	return localePath(path);
 };
 export const naivigatePush = (path: string) => {
 	const router = useRouter();

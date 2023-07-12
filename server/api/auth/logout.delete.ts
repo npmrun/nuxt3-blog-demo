@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-    await clearUserSession(event);
+	await clearUserSession(event);
 
-    return { loggedOut: true };
+	return { loggedOut: true };
 });

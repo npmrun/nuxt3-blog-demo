@@ -2,15 +2,10 @@
 // @ts-ignore
 import { bubbleCursor } from "cursor-effects";
 
-onMounted(()=>{
+onMounted(() => {
+	// eslint-disable-next-line no-new, new-cap
 	new bubbleCursor();
-})
-
-// watch(loggedIn, () => {
-//   if (!loggedIn.value) {
-//     navigateTo('/')
-//   }
-// })
+});
 </script>
 
 <template>

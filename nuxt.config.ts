@@ -21,11 +21,11 @@ export default defineNuxtConfig({
 	// https://nuxt.com/docs/api/configuration/nuxt-config#generate
 	nitro: {
 		prerender: {
-			routes: ["/article/20"]
-		}
+			routes: ["/article/20"],
+		},
 	},
 	experimental: {
-		payloadExtraction: false
+		payloadExtraction: false,
 	},
 	css: ["~/assets/css/main.css"],
 	pinia: {
@@ -37,6 +37,11 @@ export default defineNuxtConfig({
 		dynamicRouteParams: true,
 		detectBrowserLanguage: {
 			useCookie: true,
+		},
+		lazy: true,
+		compilation: {
+			strictMessage: false,
+			escapeHtml: true,
 		},
 		langDir: "locales",
 		locales: [
@@ -68,9 +73,7 @@ export default defineNuxtConfig({
 		buildAssetsDir: "static",
 		head: {
 			// https://github.com/nuxt/nuxt/discussions/16109
-			script: [
-				{ children: 'console.log("HELLO NUXT3");' }
-			],
+			script: [{ children: 'console.log("HELLO NUXT3");' }],
 		},
 	},
 });

@@ -39,23 +39,23 @@ export default defineEventHandler(async (event) => {
 		avatar: "https://picsum.photos/200/200",
 	};
 	// https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#or
-	let check = await prisma.user.findFirst({
+	const check = await prisma.user.findFirst({
 		where: {
 			OR: [
 				{
 					username: {
-						equals: userData.username
+						equals: userData.username,
 					},
 				},
 				{
 					email: {
-						equals: userData.email
+						equals: userData.email,
 					},
-				}
-			]
-		}
-	})
-	if (!!check) {
+				},
+			],
+		},
+	});
+	if (check) {
 		return sendError(
 			event,
 			createError({
