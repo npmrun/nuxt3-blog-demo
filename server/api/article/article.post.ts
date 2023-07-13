@@ -37,13 +37,23 @@ export default defineEventHandler(async (event) => {
 			data: articleData,
 		});
 	} else {
-		article = await prisma.article.update({
-			where: {
-				id,
-				authorId: user.id,
-			},
-			data: articleData,
-		});
+		try {
+			article = await prisma.article.update({
+				where: {
+					id,
+					authorId: user.id,
+				},
+				data: articleData,
+			});
+		} catch (error) {
+			return sendError(
+				event,
+				createError({
+					statusCode: 400,
+					statusMessage: "修改失败",
+				})
+			);
+		}
 	}
 
 	return {

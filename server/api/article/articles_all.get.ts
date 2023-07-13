@@ -6,13 +6,16 @@
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
 
-	await requireUserSession(event);
+	const { user } = await requireUserSession(event);
 	const { pageNum, pageSize } = getQuery(event) as {
 		pageSize: number;
 		pageNum: number;
 	};
 
 	const articles = await prisma.article.findMany({
+		where: {
+			authorId: user.id,
+		},
 		orderBy: {
 			updatedAt: "desc",
 		},

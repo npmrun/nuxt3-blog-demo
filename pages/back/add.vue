@@ -40,14 +40,22 @@ async function handleSubmit() {
 		useNuxtApp().$toast.error("文章不能为空");
 		return;
 	}
-	const res = await $fetch("/api/article/article", {
-		method: "post",
-		body: toRaw(formData),
-	});
-	console.log(res);
-	if (route.query.id) {
-		useNuxtApp().$toast.success("编辑成功");
-	} else useNuxtApp().$toast.success("新建成功");
+	try {
+		const res = await $fetch("/api/article/article", {
+			method: "post",
+			body: toRaw(formData),
+		});
+		console.log(res);
+		if (route.query.id) {
+			useNuxtApp().$toast.success("编辑成功");
+		} else useNuxtApp().$toast.success("新建成功");
+	} catch (error: any) {
+		if (error?.data?.statusMessage) {
+			useNuxtApp().$toast.error(error.data.statusMessage);
+		} else {
+			useNuxtApp().$toast.error(error.message);
+		}
+	}
 }
 
 function toArticle() {

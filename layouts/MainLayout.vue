@@ -66,13 +66,25 @@ async function handleQuit() {
 	</div>
 	<main class="ml-[40%] wrap-outer">
 		<div
-			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-1"
+			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10"
 		>
 			<NuxtLink
 				to="/"
 				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
 			>
 				首页
+			</NuxtLink>
+			<NuxtLink
+				to="/articles"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+			>
+				文章
+			</NuxtLink>
+			<NuxtLink
+				to="/snippet"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+			>
+				代码片段
 			</NuxtLink>
 			<NuxtLink
 				to="/about"
