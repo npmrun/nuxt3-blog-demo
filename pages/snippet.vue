@@ -5,5 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-	<div>snippet</div>
+	<div class="m-5">设计中...</div>
 </template>
