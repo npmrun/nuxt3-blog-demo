@@ -3,7 +3,7 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["extendedWhereUnique"]
+  // previewFeatures = ["extendedWhereUnique"] 可以隐藏了，新版本已经内置了该功能
   binaryTargets   = ["native", "debian-openssl-1.0.x"]
 }
 

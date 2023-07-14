@@ -3,7 +3,7 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"build": "nuxt build",
+		"build": "prisma generate && nuxt build",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"migrate": "prisma migrate dev --name",
@@ -37,7 +37,7 @@
 		"eslint-plugin-vue": "^9.15.1",
 		"nuxt": "^3.6.2",
 		"nuxt-icon": "^0.4.2",
-		"prettier": "^2.8.8",
+		"prettier": "^3.0.0",
 		"prisma": "^5.0.0",
 		"remove-markdown": "^0.5.0",
 		"sass": "^1.63.6",

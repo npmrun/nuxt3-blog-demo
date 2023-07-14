@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { format } from 'path';
+
 definePageMeta({
 	layout: "admin-layout",
 });
@@ -62,6 +64,17 @@ function toArticle() {
 	router.push("/article/" + route.query.id);
 	// window.open("/article/"+route.query.id)
 }
+
+function handleUploadImages(file: File) {
+	const formData = new FormData()
+	formData.set("photo", file)
+	console.log(file);
+	return [
+		{
+			url: "https://files.catbox.moe/47mlbw.png"
+		}
+	]
+}
 </script>
 
 <template>
@@ -84,6 +97,7 @@ function toArticle() {
 					v-model:value="formData.content"
 					class="h-[500px]"
 					@change="(v: string) => formData.content = v"
+					:uploadImages="handleUploadImages"
 				>
 				</MdEditor>
 			</div>
