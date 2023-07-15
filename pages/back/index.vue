@@ -46,7 +46,7 @@ const allCount = computed(() => {
 				@click-detail="handleEdit"
 			>
 			</ArticleItem>
-			<div class="flex justify-center mt-6 mb-6">
+			<div v-if="!!allCount" class="flex justify-center mt-6 mb-6">
 				<div class="join">
 					<button
 						v-for="item in allCount"

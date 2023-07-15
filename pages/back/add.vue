@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { format } from 'path';
-
 definePageMeta({
 	layout: "admin-layout",
 });
@@ -8,16 +6,23 @@ definePageMeta({
 const route = useRoute();
 const router = useRouter();
 
+const isEdit = ref(false);
 async function fetchData() {
 	if (route.query.id) {
-		const res = await $fetch("/api/article/article", {
-			method: "GET",
-			query: {
-				id: route.query.id,
-			},
-		});
-		if (res && res.data) {
-			Object.assign(formData, res.data);
+		try {
+			const res = await $fetch("/api/article/article", {
+				method: "GET",
+				query: {
+					id: route.query.id,
+				},
+			});
+			if (res && res.data) {
+				Object.assign(formData, res.data);
+				isEdit.value = true;
+			}
+		} catch (error) {
+			console.error(error);
+			isEdit.value = false;
 		}
 	}
 }
@@ -48,7 +53,7 @@ async function handleSubmit() {
 			body: toRaw(formData),
 		});
 		console.log(res);
-		if (route.query.id) {
+		if (isEdit.value) {
 			useNuxtApp().$toast.success("编辑成功");
 		} else useNuxtApp().$toast.success("新建成功");
 	} catch (error: any) {
@@ -66,21 +71,21 @@ function toArticle() {
 }
 
 function handleUploadImages(file: File) {
-	const formData = new FormData()
-	formData.set("photo", file)
+	const formData = new FormData();
+	formData.set("photo", file);
 	console.log(file);
 	return [
 		{
-			url: "https://files.catbox.moe/47mlbw.png"
-		}
-	]
+			url: "https://files.catbox.moe/47mlbw.png",
+		},
+	];
 }
 </script>
 
 <template>
 	<div class="h-screen p-10 flex flex-col">
 		<button class="btn mb-5" @click="$router.back()">返回</button>
-		<button v-if="!!route.query.id" class="btn mb-5" @click="toArticle()">
+		<button v-if="!!isEdit" class="btn mb-5" @click="toArticle()">
 			查看文章
 		</button>
 		<form class="flex-1" @submit.prevent="handleSubmit">
@@ -96,8 +101,8 @@ function handleUploadImages(file: File) {
 				<MdEditor
 					v-model:value="formData.content"
 					class="h-[500px]"
-					@change="(v: string) => formData.content = v"
-					:uploadImages="handleUploadImages"
+					:upload-images="handleUploadImages"
+					@change="(v: string) => (formData.content = v)"
 				>
 				</MdEditor>
 			</div>

@@ -2,7 +2,7 @@ module.export = {
 	apps: [
 		{
 			name: "nuxt3-blog-ssr",
-			script: "./.output/server/index.mjs",
+			script: "./server/index.mjs",
 			watch: false,
 			ignore_watch: ["node_modules", "logs", "./output/public"],
 			exec_mode: "fork",
@@ -15,7 +15,7 @@ module.export = {
 			max_restarts: 10,
 			autorestart: true,
 			restart_delay: 60,
-			port: "3336",
+			port: "3000",
 		},
 	],
 };

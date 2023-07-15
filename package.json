@@ -3,10 +3,11 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"build": "prisma generate && nuxt build",
+		"build": "prisma generate && nuxt build && pnpm delpoy",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"migrate": "prisma migrate dev --name",
+		"delpoy": "node scripts/create-delpoy.mjs",
 		"db:gui": "prisma studio",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",

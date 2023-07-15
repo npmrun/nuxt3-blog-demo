@@ -32,7 +32,11 @@ export default defineEventHandler(async (event) => {
 		},
 	});
 
-	const total = await prisma.article.count();
+	const total = await prisma.article.count({
+		where: {
+			authorId: user.id,
+		},
+	});
 
 	return {
 		statusCode: 200,

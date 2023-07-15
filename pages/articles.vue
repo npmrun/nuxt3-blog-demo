@@ -27,7 +27,7 @@ watch(
 	() => pageQuery.value.pageNum,
 	() => {
 		router.replace({ query: { page: pageQuery.value.pageNum } });
-	}
+	},
 );
 
 const { data: articleData, pending } = useFetch("/api/article/articles", {
@@ -64,7 +64,7 @@ const allCount = computed(() => {
 			@click-detail="toDetail"
 		>
 		</ArticleItem>
-		<div class="flex justify-center mt-6 mb-6">
+		<div v-if="!!allCount" class="flex justify-center mt-6 mb-6">
 			<div class="join">
 				<button
 					v-for="item in allCount"

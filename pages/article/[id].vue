@@ -8,7 +8,28 @@ definePageMeta({
 	layout: "main-layout",
 });
 const route = useRoute();
+const router = useRouter();
 const { loggedIn, user } = useUserSession();
+
+async function deleteArticle() {
+	if (!route.params.id) return;
+	pending.value = true;
+	try {
+		await $fetch("/api/article/article", {
+			method: "DELETE",
+			query: {
+				id: route.params.id,
+			},
+		});
+		pending.value = false;
+		useNuxtApp().$toast.success("删除成功");
+		router.back();
+	} catch (error) {
+		pending.value = false;
+		console.error(error);
+		useNuxtApp().$toast.success("删除失败");
+	}
+}
 
 const { data: article, pending } = useFetch("/api/article/article", {
 	method: "GET",
@@ -44,8 +65,15 @@ const { data: article, pending } = useFetch("/api/article/article", {
 				class="ml-3 rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
 				:to="`/back/add?id=${route.params.id}`"
 			>
-				<a>编辑</a>
+				编辑
 			</NuxtLink>
+			<div
+				v-if="loggedIn && user.id === article.author.id"
+				class="ml-3 rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+				@click="deleteArticle"
+			>
+				删除
+			</div>
 		</div>
 		<div v-loading="pending">
 			<Viewer

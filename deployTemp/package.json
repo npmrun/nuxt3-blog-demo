@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "start": "prisma migrate deploy && node -r dotenv/config ./server/index.mjs"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.1",
+        "prisma": "xxx"
+    }
+}
