@@ -5,27 +5,69 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const migrationsDir = path.resolve(__dirname, "../prisma/migrations");
-const migrationsDesc = path.resolve(__dirname, "../.output/prisma/migrations");
-
 fs.copyFileSync(
 	path.resolve(__dirname, "../deployTemp/ecosystem.js"),
 	".output/ecosystem.js",
 );
-
-copy(migrationsDir, migrationsDesc);
-
-let srcPkg = fs.readFileSync(path.resolve(__dirname, "../package.json"));
-let tempPkg = fs.readFileSync(
-	path.resolve(__dirname, "../deployTemp/package.json"),
+fs.copyFileSync(
+	path.resolve(__dirname, "../deployTemp/init.mjs"),
+	".output/init.mjs",
 );
-if (srcPkg) srcPkg = JSON.parse(srcPkg);
-if (tempPkg) tempPkg = JSON.parse(tempPkg);
 
-tempPkg.dependencies.prisma = srcPkg.devDependencies.prisma;
-fs.copyFileSync("./.env", ".output/.env");
-fs.copyFileSync("prisma/schema.prisma", ".output/prisma/schema.prisma");
-fs.writeFileSync(".output/package.json", JSON.stringify(tempPkg, null, 4));
+if (
+	!fs.existsSync(
+		path.resolve(__dirname, "../.output/server/node_modules/.bin"),
+	)
+) {
+	fs.mkdirSync(
+		path.resolve(__dirname, "../.output/server/node_modules/.bin"),
+	);
+}
+fs.copyFileSync(
+	path.resolve(__dirname, "../node_modules/.bin/prisma"),
+	".output/server/node_modules/.bin/prisma",
+);
+fs.copyFileSync(
+	path.resolve(__dirname, "../node_modules/.bin/prisma.CMD"),
+	".output/server/node_modules/.bin/prisma.CMD",
+);
+fs.copyFileSync(
+	path.resolve(__dirname, "../node_modules/.bin/prisma.ps1"),
+	".output/server/node_modules/.bin/prisma.ps1",
+);
+
+copy(
+	path.resolve(__dirname, "../prisma/migrations"),
+	path.resolve(
+		__dirname,
+		"../.output/server/node_modules/.prisma/client/migrations",
+	),
+);
+
+copy(
+	path.resolve(__dirname, "../node_modules/prisma"),
+	path.resolve(__dirname, "../.output/server/node_modules/prisma"),
+);
+
+if (!fs.existsSync(path.resolve(__dirname, "../.output/node_modules"))) {
+	fs.mkdirSync(path.resolve(__dirname, "../.output/node_modules"));
+}
+if (!fs.existsSync(path.resolve(__dirname, "../.output/node_modules/dotenv"))) {
+	fs.mkdirSync(path.resolve(__dirname, "../.output/node_modules/dotenv"));
+}
+copy(
+	path.resolve(__dirname, "../node_modules/dotenv"),
+	path.resolve(__dirname, "../.output/node_modules/dotenv"),
+);
+
+fs.copyFileSync("./.env", ".output/server/.env");
+fs.copyFileSync(
+	"prisma/schema.prisma",
+	".output/server/node_modules/.prisma/client/schema.prisma",
+);
+
+// npx prisma migrate deploy --schema server/node_modules/.prisma/client/schema.prisma
+// exec("")
 
 function copy(sd, td) {
 	// 读取目录下的文件，返回文件名及文件类型{name: 'xxx.txt, [Symbol(type)]: 1 }
@@ -37,7 +79,7 @@ function copy(sd, td) {
 		const tagFile = path.resolve(td, file.name);
 		// 文件是目录且未创建
 		if (file.isDirectory() && !fs.existsSync(tagFile)) {
-			console.log(tagFile);
+			// console.log(tagFile);
 			fs.mkdirSync(tagFile, { recursive: true });
 			copy(srcFile, tagFile);
 		} else if (file.isDirectory() && fs.existsSync(tagFile)) {
