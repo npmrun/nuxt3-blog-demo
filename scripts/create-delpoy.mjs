@@ -10,6 +10,10 @@ fs.copyFileSync(
 	".output/ecosystem.js",
 );
 fs.copyFileSync(
+	path.resolve(__dirname, "../deployTemp/pm2-start.sh"),
+	".output/pm2-start.sh",
+);
+fs.copyFileSync(
 	path.resolve(__dirname, "../deployTemp/init.mjs"),
 	".output/init.mjs",
 );
@@ -48,7 +52,48 @@ copy(
 	path.resolve(__dirname, "../node_modules/prisma"),
 	path.resolve(__dirname, "../.output/server/node_modules/prisma"),
 );
+if (
+	!fs.existsSync(
+		path.resolve(
+			__dirname,
+			"../.output/server/node_modules/@prisma/engines",
+		),
+	)
+) {
+	fs.mkdirSync(
+		path.resolve(
+			__dirname,
+			"../.output/server/node_modules/@prisma/engines",
+		),
+	);
+}
+if (
+	!fs.existsSync(
+		path.resolve(
+			__dirname,
+			"../.output/server/node_modules/@prisma/engines-version",
+		),
+	)
+) {
+	fs.mkdirSync(
+		path.resolve(
+			__dirname,
+			"../.output/server/node_modules/@prisma/engines-version",
+		),
+	);
+}
 
+copy(
+	path.resolve(__dirname, "../node_modules/@prisma/engines"),
+	path.resolve(__dirname, "../.output/server/node_modules/@prisma/engines"),
+);
+copy(
+	path.resolve(__dirname, "../node_modules/@prisma/engines-version"),
+	path.resolve(
+		__dirname,
+		"../.output/server/node_modules/@prisma/engines-version",
+	),
+);
 if (!fs.existsSync(path.resolve(__dirname, "../.output/node_modules"))) {
 	fs.mkdirSync(path.resolve(__dirname, "../.output/node_modules"));
 }

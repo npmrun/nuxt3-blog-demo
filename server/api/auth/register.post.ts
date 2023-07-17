@@ -1,4 +1,4 @@
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 	if (!username || !email || !password || !repeatPassword) {
 		return sendError(
 			event,
-			createError({ statusCode: 400, statusMessage: "Invalid params" })
+			createError({ statusCode: 400, statusMessage: "Invalid params" }),
 		);
 	}
 	if (password.length < 6 || password.length > 20) {
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
 			createError({
 				statusCode: 400,
 				statusMessage: "密码不应超过20位，不应小于6位",
-			})
+			}),
 		);
 	}
 	if (password !== repeatPassword) {
@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
 			createError({
 				statusCode: 400,
 				statusMessage: "Passwords do not match",
-			})
+			}),
 		);
 	}
 
@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
 			createError({
 				statusCode: 400,
 				statusMessage: "邮箱或用户名重复",
-			})
+			}),
 		);
 	}
 

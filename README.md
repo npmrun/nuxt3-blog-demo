@@ -13,3 +13,9 @@ pnpm build
 ```
 node -r dotenv/config server/index.mjs dotenv_config_path=./server/.env
 ```
+
+或者用pm2:
+```
+pm2 start pm2-start.sh --name nuxt3-demo
+# 暂时没有ecosystem.js，因为没有启动起来
+```
