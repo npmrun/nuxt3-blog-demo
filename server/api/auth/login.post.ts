@@ -1,4 +1,4 @@
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;

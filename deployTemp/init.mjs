@@ -29,8 +29,8 @@ export function execa(command, argu, callback, cwd) {
 	return myProcess;
 }
 execa(
-	"npx",
-	"prisma migrate deploy --schema node_modules/.prisma/client/schema.prisma".split(
+	"node",
+	"node_modules/prisma/build/index.js migrate deploy --schema node_modules/.prisma/client/schema.prisma".split(
 		" ",
 	),
 	(err, data, isComplete) => {

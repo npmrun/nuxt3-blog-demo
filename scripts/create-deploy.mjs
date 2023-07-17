@@ -31,14 +31,18 @@ fs.copyFileSync(
 	path.resolve(__dirname, "../node_modules/.bin/prisma"),
 	".output/server/node_modules/.bin/prisma",
 );
-fs.copyFileSync(
-	path.resolve(__dirname, "../node_modules/.bin/prisma.CMD"),
-	".output/server/node_modules/.bin/prisma.CMD",
-);
-fs.copyFileSync(
-	path.resolve(__dirname, "../node_modules/.bin/prisma.ps1"),
-	".output/server/node_modules/.bin/prisma.ps1",
-);
+if (fs.existsSync(path.resolve(__dirname, "../node_modules/.bin/prisma.CMD"))) {
+	fs.copyFileSync(
+		path.resolve(__dirname, "../node_modules/.bin/prisma.CMD"),
+		".output/server/node_modules/.bin/prisma.CMD",
+	);
+}
+if (fs.existsSync(path.resolve(__dirname, "../node_modules/.bin/prisma.ps1"))) {
+	fs.copyFileSync(
+		path.resolve(__dirname, "../node_modules/.bin/prisma.ps1"),
+		".output/server/node_modules/.bin/prisma.ps1",
+	);
+}
 
 copy(
 	path.resolve(__dirname, "../prisma/migrations"),
@@ -47,7 +51,15 @@ copy(
 		"../.output/server/node_modules/.prisma/client/migrations",
 	),
 );
-
+if (
+	!fs.existsSync(
+		path.resolve(__dirname, "../.output/server/node_modules/prisma"),
+	)
+) {
+	fs.mkdirSync(
+		path.resolve(__dirname, "../.output/server/node_modules/prisma"),
+	);
+}
 copy(
 	path.resolve(__dirname, "../node_modules/prisma"),
 	path.resolve(__dirname, "../.output/server/node_modules/prisma"),
