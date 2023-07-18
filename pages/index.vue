@@ -12,7 +12,7 @@ definePageMeta({
 
 const content = ref(indexMD);
 
-const { $toast: toast } = useNuxtApp()
+const { $toast: toast } = useNuxtApp();
 </script>
 
 <template>
@@ -42,16 +42,20 @@ const { $toast: toast } = useNuxtApp()
 			src="http://www.cross-code.com/en/start"
 			frameborder="0"
 		></iframe> -->
-		<h1 class="text-3xl font-bold my-4">
-			书籍
-		</h1>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-			<Card v-for="i in 12" :key="i + ''" @click="toast.warn('暂未实现')"></Card>
+		<h1 class="text-3xl font-bold my-4">书籍</h1>
+		<div
+			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3"
+		>
+			<Card
+				v-for="i in 12"
+				:key="i + ''"
+				@click="toast.warn('暂未实现')"
+			></Card>
 		</div>
-		<h1 class="text-3xl font-bold my-4">
-			游戏
-		</h1>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+		<h1 class="text-3xl font-bold my-4">游戏</h1>
+		<div
+			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3"
+		>
 			<a href="http://www.cross-code.com/en/start" target="_blank">
 				<Card></Card>
 			</a>

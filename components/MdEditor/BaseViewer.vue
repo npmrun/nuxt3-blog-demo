@@ -41,7 +41,7 @@ export default defineComponent({
 					on();
 				});
 			},
-			{ deep: true }
+			{ deep: true },
 		);
 
 		onMounted(() => {
@@ -60,7 +60,7 @@ export default defineComponent({
 			if (!href || !href.startsWith("#")) return;
 
 			const dest = (markdownBody.value as HTMLElement).querySelector(
-				"#user-content-" + href.slice(1)
+				"#user-content-" + href.slice(1),
 			);
 			if (dest) dest.scrollIntoView();
 		};
@@ -76,7 +76,10 @@ export default defineComponent({
 				cbs.value = props.plugins.map(
 					({ viewerEffect }: any) =>
 						viewerEffect &&
-						viewerEffect({ markdownBody: markdownBody.value, file })
+						viewerEffect({
+							markdownBody: markdownBody.value,
+							file,
+						}),
 				);
 			}
 		};

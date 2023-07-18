@@ -98,13 +98,13 @@ function handleUploadImages(file: File) {
 				/>
 			</div>
 			<div class="mt-2 form-control">
-				<MdEditor
+				<MdEditorBaseMdEditor
 					v-model:value="formData.content"
 					class="h-[500px]"
 					:upload-images="handleUploadImages"
 					@change="(v: string) => (formData.content = v)"
 				>
-				</MdEditor>
+				</MdEditorBaseMdEditor>
 			</div>
 			<div class="form-control mt-2 w-full max-w-xs">
 				<label class="cursor-pointer label">

@@ -16,7 +16,7 @@ const porps = withDefaults(
 	}>(),
 	{
 		text: "加载中",
-	}
+	},
 );
 </script>
 

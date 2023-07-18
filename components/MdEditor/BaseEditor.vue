@@ -35,7 +35,7 @@ export default defineComponent({
 				}
 				editorRef.value?.$set(copy);
 			},
-			{ deep: true }
+			{ deep: true },
 		);
 
 		onMounted(() => {

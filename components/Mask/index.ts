@@ -1,5 +1,5 @@
 import { createVNode, render, App } from "vue";
-import LoadingConstructor from "./Mask.vue";
+import LoadingConstructor from "./BaseMask.vue";
 
 function createElement(props = {}) {
 	const container = document.createElement("div");

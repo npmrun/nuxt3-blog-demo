@@ -49,6 +49,10 @@ const { data: article, pending } = useFetch("/api/article/article", {
 		return input?.data;
 	},
 });
+
+useHead({
+	title: article.value?.title ?? "文章",
+});
 </script>
 
 <template>
