@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 	if (!id || isNaN(+id)) {
 		return sendError(
 			event,
-			createError({ statusCode: 400, statusMessage: "Invalid params" })
+			createError({ statusCode: 400, statusMessage: "Invalid params" }),
 		);
 	}
 
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 	if (!article) {
 		return sendError(
 			event,
-			createError({ statusCode: 400, statusMessage: "不存在该文章" })
+			createError({ statusCode: 400, statusMessage: "不存在该文章" }),
 		);
 	}
 

@@ -56,7 +56,7 @@ const allCount = computed(() => {
 </script>
 
 <template>
-	<div v-loading="pending">
+	<div v-loading="pending" class="min-h-[120px]">
 		<ArticleItem
 			v-for="(article, index) in articleData.list"
 			:key="index"

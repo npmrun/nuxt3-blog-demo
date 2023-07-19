@@ -31,7 +31,11 @@ async function deleteArticle() {
 	}
 }
 
-const { data: article, pending } = useFetch("/api/article/article", {
+const {
+	data: article,
+	pending,
+	error,
+} = useFetch("/api/article/article", {
 	method: "GET",
 	query: {
 		id: route.params.id,
@@ -80,7 +84,18 @@ useHead({
 			</div>
 		</div>
 		<div v-loading="pending">
+			<template v-if="!!error">
+				<div class="text-center mt-5">
+					<div class="text-red-500 mb-2">
+						{{ error?.data.statusMessage ?? error }}
+					</div>
+					<button class="btn btn-sm" @click="$router.back()">
+						返回
+					</button>
+				</div>
+			</template>
 			<Viewer
+				v-else
 				:plugins="[gfm(), frontmatter(), btybreaks()]"
 				:locale="zhHans"
 				:value="article.content"
