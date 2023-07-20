@@ -6,26 +6,32 @@ import { readFiles } from "h3-formidable";
 
 export default defineEventHandler(async (event) => {
 	const {
-		files: {
-			photo: [{ filepath, mimetype }],
-		},
-		fields,
+		file: [{ filepath, mimetype, originalFilename }],
 	} = await readFiles(event, {
-		includeFields: true,
+		includeFields: false,
 	});
-	console.log(filepath);
 
 	const imageName =
-		String(Date.now()) + String(Math.round(Math.random() * 10000000));
+		dateTimeFormat(new Date(), "yyyy_MM_dd") +
+		"_" +
+		String(Date.now()) +
+		"_" +
+		String(Math.round(Math.random() * 10000000)) +
+		"_" +
+		originalFilename.split(".").slice(0, -1).join("");
+
 	const newPath = `${path.join("public", "uploads", imageName)}.${
 		mimetype.split("/")[1]
 	}`;
+
+	logger.debug(newPath);
+
 	fs.copyFileSync(filepath, newPath);
-	// TODO 会产生临时文件，记得处理删除
 	try {
 		fs.unlinkSync(filepath);
 	} catch (error) {
-		console.error("临时文件删除失败，请知悉错误：");
+		console.error("当前文件临时为:" + filepath);
+		console.error("删除失败，请知悉错误：");
 		console.error(error);
 	}
 	return { success: true, url: newPath.replace(/^public/, "") };

@@ -60,6 +60,7 @@
 		"gray-matter": "^4.0.3",
 		"h3-formidable": "^0.3.8",
 		"juejin-markdown-themes": "^1.29.7",
+		"log4js": "^6.9.1",
 		"pinia": "^2.1.4",
 		"remark-directive": "^2.0.1",
 		"rimraf": "^5.0.1",
