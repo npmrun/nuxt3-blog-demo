@@ -19,3 +19,12 @@ node -r dotenv/config server/index.mjs dotenv_config_path=./server/.env
 pm2 start pm2-start.sh --name nuxt3-demo
 # 暂时没有ecosystem.js，因为没有启动起来
 ```
+
+## 注意
+
+在以下两个文件中用到了path.resolve,所以其目录是相对于工作目录来的。
+
+- server/middleware/0.global.ts
+- server/middleware/3.public.ts
+
+开发运行时以根目录为工作目录，生产是应一.output文件夹为工作目录，如此才是符合预期的工作

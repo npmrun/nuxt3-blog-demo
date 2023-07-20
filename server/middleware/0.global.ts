@@ -11,7 +11,7 @@ const log4jsConfig = function () {
 		appenders: {
 			file: {
 				type: "file",
-				filename: path.resolve(process.cwd(), "logs", "./Site.log"),
+				filename: path.resolve("./logs", "./Site.log"),
 			},
 			console: {
 				type: "console",
