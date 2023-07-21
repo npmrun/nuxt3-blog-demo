@@ -1,3 +1,5 @@
+console.log("2");
+
 export default eventHandler(async (event) => {
 	// TODO 接口需要权限的如果没有携带权限即全部报403
 	// // 接口不需要处理

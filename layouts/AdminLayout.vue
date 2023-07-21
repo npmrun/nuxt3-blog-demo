@@ -6,15 +6,17 @@
 			<h1 class="p-4 text-5xl font-bold">YSir</h1>
 			<ul class="menu bg-base-200 w-56 rounded-box">
 				<li>
-					<NuxtLink to="/"> 返回首页 </NuxtLink>
+					<AppLink to="/"> 返回首页 </AppLink>
 				</li>
 			</ul>
 			<ul class="menu bg-base-200 w-56 rounded-box">
 				<li>
-					<NuxtLink to="/back"> 文章 </NuxtLink>
+					<AppLink to="/back" active-class="active"> 文章 </AppLink>
 				</li>
 				<li>
-					<NuxtLink to="/back/about"> 关于 </NuxtLink>
+					<AppLink to="/back/about" active-class="active">
+						关于
+					</AppLink>
 				</li>
 			</ul>
 		</div>
@@ -25,7 +27,7 @@
 </template>
 
 <style lang="scss" scoped>
-.router-link-active {
+/* .router-link-active {
 	background-color: hsl(var(--bc) / 0.1);
-}
+} */
 </style>

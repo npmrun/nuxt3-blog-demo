@@ -40,32 +40,34 @@ https://github.com/nuxt/nuxt/issues/15779
  * 思路：根据nitro/src/runtime/static.ts的思路写一个插件返回public的文件
  */
 
+import { resolve } from "node:path";
+import fs, { promises as fsp } from "node:fs";
+
 import {
-    decodePath,
-    joinURL,
-    parseURL,
-    withLeadingSlash,
-    withoutTrailingSlash,
+	decodePath,
+	joinURL,
+	parseURL,
+	withLeadingSlash,
+	withoutTrailingSlash,
 } from "ufo";
-import { resolve } from 'node:path'
-import fs from 'fs'
-import { promises as fsp } from 'node:fs'
+
+console.log("01");
 
 const METHODS = new Set(["HEAD", "GET"]);
 
 export default eventHandler((event) => {
-    if (event.node.req.method && !METHODS.has(event.node.req.method)) {
-        return;
-    }
-    let id = decodePath(
-        withLeadingSlash(
-            withoutTrailingSlash(parseURL(event.node.req.url).pathname)
-        )
-    );
+	if (event.node.req.method && !METHODS.has(event.node.req.method)) {
+		return;
+	}
+	const id = decodePath(
+		withLeadingSlash(
+			withoutTrailingSlash(parseURL(event.node.req.url).pathname),
+		),
+	);
 
-    const file = resolve("public" + id)
-    if (fs.existsSync(file)) {
-        logger.debug("获取文件:", file)
-        return fsp.readFile(file)
-    }
+	const file = resolve("public" + id);
+	if (fs.existsSync(file) && fs.statSync(file).isFile()) {
+		logger.debug("获取文件:", file);
+		return fsp.readFile(file);
+	}
 });

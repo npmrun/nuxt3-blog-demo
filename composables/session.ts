@@ -15,7 +15,7 @@ export const useUserSession = () => {
 
 async function fetch() {
 	useUserSessionState().value = await useRequestFetch()("/api/session").catch(
-		() => ({})
+		() => ({}),
 	);
 }
 

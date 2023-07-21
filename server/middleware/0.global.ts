@@ -3,6 +3,8 @@ import path from "path";
 import log4js from "log4js";
 import type { Logger } from "log4js";
 
+console.log("0");
+
 // eslint-disable-next-line import/no-named-as-default-member
 const { getLogger, configure } = log4js;
 

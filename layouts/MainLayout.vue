@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { locale } = useI18n();
 const { user, loggedIn } = useUserSession();
-const localePath = useLocalePath();
 
 async function handleQuit() {
 	const { clear } = useUserSession();
@@ -43,7 +42,7 @@ async function handleQuit() {
 			<div>
 				<ul class="mt-4 justify-center flex">
 					<template v-if="loggedIn">
-						<NuxtLink :to="localePath('/back')">
+						<NuxtLink :to="getLocalePath('/back')">
 							<button class="btn btn-sm">进入后台</button>
 						</NuxtLink>
 						<button class="btn btn-sm" @click="handleQuit">
@@ -51,7 +50,10 @@ async function handleQuit() {
 						</button>
 					</template>
 					<template v-else>
-						<NuxtLink v-if="!loggedIn" :to="localePath('/login')">
+						<NuxtLink
+							v-if="!loggedIn"
+							:to="getLocalePath('/login')"
+						>
 							<button class="btn btn-sm">登陆</button>
 						</NuxtLink>
 					</template>

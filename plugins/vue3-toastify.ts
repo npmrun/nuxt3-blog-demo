@@ -8,6 +8,12 @@ declare module "nuxt/dist/app/nuxt" {
 	}
 }
 
+declare module "@vue/runtime-core" {
+	interface ComponentCustomProperties {
+		$toast: typeof toast;
+	}
+}
+
 export default defineNuxtPlugin((nuxtApp) => {
 	// @ts-ignore
 	nuxtApp.vueApp.use(Vue3Toastify.default || Vue3Toastify, {
