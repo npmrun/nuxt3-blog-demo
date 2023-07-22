@@ -2,6 +2,21 @@ import bcrypt from "bcryptjs";
 
 export default defineEventHandler(async (event) => {
 	const prisma = event.context.prisma;
+
+	const node = await getConfigByKey(event, ESiteConfig.CanRegister);
+
+	// 生产环境中没有设置canRegister配置的不能注册
+	// canRegister为OFF的不能注册
+	if ((!node && !isDev) || (node && node.value === "OFF")) {
+		return sendError(
+			event,
+			createError({
+				statusCode: 400,
+				statusMessage: "管理员未开启注册功能",
+			}),
+		);
+	}
+
 	const body = await readBody(event);
 
 	const { username, email, password, repeatPassword } = body;

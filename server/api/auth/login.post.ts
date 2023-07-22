@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 			createError({
 				statusCode: 400,
 				statusMessage: "Ivalid params",
-			})
+			}),
 		);
 	}
 
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
 			createError({
 				statusCode: 400,
 				statusMessage: "Email or password is invalid",
-			})
+			}),
 		);
 	}
 
@@ -40,13 +40,14 @@ export default defineEventHandler(async (event) => {
 			createError({
 				statusCode: 400,
 				statusMessage: "Username or password is invalid",
-			})
+			}),
 		);
 	}
 
 	await setUserSession(event, {
 		user: {
 			id: user.id,
+			role: user.role,
 			email: user.email,
 			username: user.username,
 			nickname: user.nickname,

@@ -1,3 +1,5 @@
+export const isDev = process.env.NODE_ENV === "development";
+
 export function dateTimeFormat(
 	date: Date | string | number,
 	fmt = "yyyy-MM-dd HH:mm:ss",
