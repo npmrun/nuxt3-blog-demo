@@ -117,7 +117,7 @@ copy(
 	path.resolve(__dirname, "../.output/node_modules/dotenv"),
 );
 
-fs.copyFileSync("./.env", ".output/server/.env");
+fs.copyFileSync("./.env.prod", ".output/server/.env");
 fs.copyFileSync(
 	"prisma/schema.prisma",
 	".output/server/node_modules/.prisma/client/schema.prisma",

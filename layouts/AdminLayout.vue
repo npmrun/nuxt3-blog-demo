@@ -14,6 +14,11 @@
 					<AppLink to="/back" active-class="active"> 文章 </AppLink>
 				</li>
 				<li>
+					<AppLink to="/back/userinfo" active-class="active">
+						用户信息
+					</AppLink>
+				</li>
+				<li>
 					<AppLink to="/back/about" active-class="active">
 						关于
 					</AppLink>
