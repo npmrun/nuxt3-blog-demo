@@ -57,22 +57,15 @@ const allCount = computed(() => {
 
 <template>
 	<div v-loading="pending" class="min-h-[120px]">
-		<ArticleItem
-			v-for="(article, index) in articleData.list"
-			:key="index"
-			:article="article"
-			@click-detail="toDetail"
-		>
+		<ArticleItem v-for="(article, index) in articleData.list" :key="index" :article="article" @click-detail="toDetail">
 		</ArticleItem>
+		<div class="pt-5 text-center" v-if="articleData.list.length == 0">
+			空空如也~
+		</div>
 		<div v-if="!!allCount" class="flex justify-center mt-6 mb-6">
 			<div class="join">
-				<button
-					v-for="item in allCount"
-					:key="item"
-					class="join-item btn"
-					:class="[pageQuery.pageNum === item ? 'btn-active' : '']"
-					@click="pageQuery.pageNum = item"
-				>
+				<button v-for="item in allCount" :key="item" class="join-item btn"
+					:class="[pageQuery.pageNum === item ? 'btn-active' : '']" @click="pageQuery.pageNum = item">
 					{{ item }}
 				</button>
 			</div>

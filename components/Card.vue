@@ -12,7 +12,7 @@
             src="https://web-abin.github.io/abinWeb/static/home.332c003f.jpg" alt="" />
         <div
             class="absolute bottom-0 text-base-100 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-2 py-1 text-center text-sm opacity-80 line-clamp-1">
-            梦中好杀人
+            尚在开发中
         </div>
     </div>
 </template>
