@@ -52,6 +52,7 @@
 		"@bytemd/plugin-breaks": "^1.21.0",
 		"@bytemd/plugin-frontmatter": "^1.21.0",
 		"@bytemd/plugin-gfm": "^1.21.0",
+		"@editorjs/editorjs": "^2.27.2",
 		"@pinia/nuxt": "^0.4.11",
 		"@prisma/client": "5.0.0",
 		"@tailwindcss/typography": "^0.5.9",

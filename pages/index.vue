@@ -11,11 +11,9 @@ definePageMeta({
 		<div
 			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3"
 		>
-			<Card
-				v-for="i in 1"
-				:key="i + ''"
-				@click="$toast.warn('暂未实现')"
-			></Card>
+			<AppLink v-for="i in 1" :key="i + ''" to="/books">
+				<Card></Card>
+			</AppLink>
 		</div>
 	</div>
 </template>
