@@ -1,9 +1,24 @@
 console.log("2");
 
 export default eventHandler(async (event) => {
+	// 接口不需要处理
+	// if (event.path.startsWith("/api")) return;
 	// TODO 接口需要权限的如果没有携带权限即全部报403
-	// // 接口不需要处理
-	// if(event.path.startsWith("/api")) return
+	// const prisma = event.context.prisma;
+	// const adminUser = await prisma.user.findFirst({
+	// 	where: {
+	// 		role: "SUPERADMIN",
+	// 	},
+	// });
+	// if (!adminUser && !event.path.startsWith("/adminRegister")) {
+	// 	return sendRedirect(event, "/adminRegister");
+	// }
+	// if (adminUser && event.path.startsWith("/adminRegister")) {
+	// 	return sendError(
+	// 		event,
+	// 		createError({ statusCode: 400, statusMessage: "不允许进入该页面" }),
+	// 	);
+	// }
 	// const endpoints = [
 	//     '/'
 	// ]

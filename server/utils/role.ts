@@ -2,7 +2,7 @@ import type { H3Event } from "h3";
 
 export const enum ERole {
 	USER = "USER",
-	ADMIN = "ADMIN",
+	SUPERADMIN = "SUPERADMIN",
 }
 
 export async function checkRole(event: H3Event, role: ERole) {
