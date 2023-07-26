@@ -35,7 +35,7 @@ const formData = reactive({
 	id: undefined,
 	title: "",
 	content: "",
-	published: false,
+	published: true,
 });
 
 async function handleSubmit() {
@@ -70,15 +70,23 @@ function toArticle() {
 	// window.open("/article/"+route.query.id)
 }
 
-function handleUploadImages(file: File) {
+async function handleUploadImages(files: File[]) {
 	const formData = new FormData();
-	formData.set("photo", file);
-	console.log(file);
-	return [
-		{
-			url: "https://files.catbox.moe/47mlbw.png",
-		},
-	];
+	files.forEach(file => {
+		formData.append("file", file);
+	})
+	const res = await $fetch("/api/upload", {
+		method: "POST",
+		body: formData,
+	})
+	if (res && res.url) {
+		return [
+			{
+				url: res.url
+			},
+		];
+	}
+
 }
 </script>
 
@@ -88,37 +96,21 @@ function handleUploadImages(file: File) {
 		<button v-if="!!isEdit" class="btn mb-5" @click="toArticle()">
 			查看文章
 		</button>
-		<form class="flex-1" @submit.prevent="handleSubmit">
+		<form class="flex-1 h-0 flex flex-col" @submit.prevent="handleSubmit">
 			<div class="form-control">
-				<input
-					v-model="formData.title"
-					type="text"
-					placeholder="文章标题"
-					class="input input-bordered input-primary w-full max-w-xs"
-				/>
+				<input v-model="formData.title" type="text" placeholder="文章标题"
+					class="input input-bordered input-primary w-full max-w-xs" />
 			</div>
-			<div class="mt-2 form-control">
-				<MdEditorBaseMdEditor
-					v-model:value="formData.content"
-					class="h-[500px]"
-					:upload-images="handleUploadImages"
-					@change="(v: string) => (formData.content = v)"
-				>
-				</MdEditorBaseMdEditor>
-			</div>
+			<MdEditorBaseMdEditor v-model:value="formData.content" class="mt-2 flex-1 h-0"
+				:upload-images="handleUploadImages" @change="(v: string) => (formData.content = v)">
+			</MdEditorBaseMdEditor>
 			<div class="form-control mt-2 w-full max-w-xs">
 				<label class="cursor-pointer label">
 					<span class="label-text">发布</span>
-					<input
-						v-model="formData.published"
-						type="checkbox"
-						class="checkbox checkbox-success"
-					/>
+					<input v-model="formData.published" type="checkbox" class="checkbox checkbox-success" />
 				</label>
 			</div>
-			<div
-				class="form-control join join-vertical lg:join-horizontal mt-2 w-full max-w-xs"
-			>
+			<div class="form-control join join-vertical lg:join-horizontal mt-2 w-full max-w-xs">
 				<button type="submit" class="btn w-full join-item">保存</button>
 			</div>
 		</form>

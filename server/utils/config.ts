@@ -19,6 +19,7 @@ export const enum ESiteConfig {
 	 * 是否可以注册
 	 */
 	CanRegister = "canRegister",
+	BaseUrl = "BaseUrl",
 }
 
 export async function getConfig(event: H3Event) {

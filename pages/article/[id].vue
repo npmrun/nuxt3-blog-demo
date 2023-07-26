@@ -68,6 +68,11 @@ useHead({
 				</li>
 				<li>{{ article.title ?? "加载中" }}</li>
 			</ul>
+			<div
+				class="ml-3 rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+			>
+				查看源码
+			</div>
 			<NuxtLink
 				v-if="loggedIn && user.id === article.author.id"
 				class="ml-3 rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"

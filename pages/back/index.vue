@@ -39,24 +39,17 @@ const allCount = computed(() => {
 			<button class="btn" @click="$router.push('/back/add')">
 				新建文章
 			</button>
-			<ArticleItem
-				v-for="(article, index) in articlesData.list"
-				:key="index"
-				:article="article"
-				@click-detail="handleEdit"
-			>
+			<ArticleItem v-for="(article, index) in articlesData.list" :key="index" :article="article"
+				@click-detail="handleEdit">
 			</ArticleItem>
+			<div class="pt-5 text-center" v-if="articlesData.list.length == 0">
+				空空如也~
+			</div>
 			<div v-if="!!allCount" class="flex justify-center mt-6 mb-6">
 				<div class="join">
-					<button
-						v-for="item in allCount"
-						:key="item"
-						class="join-item btn"
-						:class="[
-							pageQuery.pageNum === item ? 'btn-active' : '',
-						]"
-						@click="pageQuery.pageNum = item"
-					>
+					<button v-for="item in allCount" :key="item" class="join-item btn" :class="[
+						pageQuery.pageNum === item ? 'btn-active' : '',
+					]" @click="pageQuery.pageNum = item">
 						{{ item }}
 					</button>
 				</div>

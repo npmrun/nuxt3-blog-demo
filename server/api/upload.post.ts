@@ -5,6 +5,8 @@ import * as path from "path";
 import { readFiles } from "h3-formidable";
 
 export default defineEventHandler(async (event) => {
+	await requireUserSession(event)
+	const BaseUrl = await getConfigByKey(event, ESiteConfig.BaseUrl)
 	const {
 		file: [{ filepath, mimetype, originalFilename }],
 	} = await readFiles(event, {
@@ -20,9 +22,8 @@ export default defineEventHandler(async (event) => {
 		"_" +
 		originalFilename.split(".").slice(0, -1).join("");
 
-	const newPath = `${path.join("public", "uploads", imageName)}.${
-		mimetype.split("/")[1]
-	}`;
+	const newPath = `${path.join("public", "uploads", imageName)}.${mimetype.split("/")[1]
+		}`;
 
 	logger.debug(newPath);
 
@@ -34,5 +35,6 @@ export default defineEventHandler(async (event) => {
 		console.error("删除失败，请知悉错误：");
 		console.error(error);
 	}
-	return { success: true, url: newPath.replace(/^public/, "") };
+	const base = BaseUrl?.value ?? event.node.req.headers.origin
+	return { success: true, url: `${base}${newPath.replace(/^public/, "")}` };
 });
