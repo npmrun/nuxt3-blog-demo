@@ -53,10 +53,19 @@ const {
 		return input?.data;
 	},
 });
-
-useHead({
-	title: article.value?.title ?? "文章",
+watchEffect(() => {
+	useHead({
+		title: article.value?.title ?? "文章",
+	});
 });
+
+const computedContent = computed(() => {
+	if (article.value?.content) {
+		return article.value.content; // .replace(/\n/g, "<br>");
+	}
+});
+
+const showRaw = ref(false);
 </script>
 
 <template>
@@ -70,8 +79,9 @@ useHead({
 			</ul>
 			<div
 				class="ml-3 rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
+				@click="showRaw = !showRaw"
 			>
-				查看源码
+				{{ showRaw ? "查看文章" : "查看源码" }}
 			</div>
 			<NuxtLink
 				v-if="loggedIn && user.id === article.author.id"
@@ -100,16 +110,20 @@ useHead({
 				</div>
 			</template>
 			<Viewer
-				v-else
+				v-else-if="!showRaw"
 				:plugins="[gfm(), frontmatter(), btybreaks()]"
 				:locale="zhHans"
 				:value="article.content"
 			></Viewer>
+			<template v-else-if="showRaw">
+				<div
+					style="white-space: pre-wrap"
+					v-text="computedContent"
+				></div>
+			</template>
 		</div>
 		<ClientOnly>
-			<div>
-				sadas
-			</div>
+			<div>sadas</div>
 		</ClientOnly>
 	</div>
 </template>

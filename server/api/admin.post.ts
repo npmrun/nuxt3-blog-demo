@@ -2,8 +2,8 @@ import bcrypt from "bcryptjs";
 
 export default defineEventHandler(async (event) => {
 	await checkRoute(event, { SUPERADMIN: true });
-
 	const body = await readBody(event);
+	const prisma = event.context.prisma;
 
 	const { username, email, password, repeatPassword } = body;
 
