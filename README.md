@@ -6,7 +6,9 @@
 
 pnpm build
 
-会生成.output文件夹，其中init.mjs用于迁移数据库用。
+会生成.output文件夹，其中init.mjs用于迁移数据库用, 主要是这一点。
+
+还要注意`.output\public\uploads`中上传的文件别删除了，这点需要修改一下。
 
 运行该项目，环境变量是从`.env`复制到`.output/server/.env`中，打包前可以在`.env`修改，打包后可以在`.output/server/.env`修改，或者重新打包：
 
