@@ -5,6 +5,10 @@ export default defineNuxtConfig({
 		session: {
 			name: "nuxt-session",
 			password: "",
+			// cookie:{ 
+			// 	// https://57code.gitee.io/nuxt3-docs-zh/usage/cookies.html#httponly
+			// 	secure: false
+			// }
 		},
 	},
 	modules: [
