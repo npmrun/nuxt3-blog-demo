@@ -10,14 +10,12 @@ definePageMeta({
 });
 
 const loginModalEl = ref<HTMLDialogElement>()
-
 function openLoginModal() {
-    loginModalEl.value?.showModal()
+    naivigatePush("/login")
+    // loginModalEl.value?.showModal()
 }
 
-console.log(22);
-
-
+const { user, loggedIn } = useUserSession()
 const {
     data: article,
     pending,
@@ -31,6 +29,8 @@ const {
 <template>
     <div class="max-w-[960px] mx-auto min-h-full py-8 flex flex-col">
         <div>
+            <div v-if="loggedIn" class="mb-2">欢迎您, <span class="underline underline-offset-2 cursor-pointer">{{
+                user.nickname }}</span>阁下</div>
             <ChangeLanguage class="mr-2"></ChangeLanguage>
             <ChangeTheme></ChangeTheme>
         </div>
@@ -43,17 +43,16 @@ const {
                 </div>
             </div>
             <div class="absolute top-8 left-full ml-8">
-                <div class="tooltip tooltip-right" data-tip="登陆">
-                    <button @click="openLoginModal"
-                        class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
+                <div v-if="!loggedIn" class="tooltip tooltip-right" data-tip="登陆">
+                    <button @click="openLoginModal" class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
                         <Icon name="ant-design:login-outlined" class="h-6 w-6"></Icon>
                     </button>
                 </div>
-                <!-- <div class="tooltip tooltip-right mt-3" data-tip="编辑">
+                <div v-else class="tooltip tooltip-right" data-tip="编辑">
                     <button class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
                         <Icon name="mingcute:edit-line" class="h-6 w-6"></Icon>
                     </button>
-                </div> -->
+                </div>
             </div>
             <div class="p-5 rounded-lg bg-base-100 shadow-lg">
                 <Viewer :plugins="[gfm(), frontmatter(), btybreaks()]" :locale="zhHans" :value="article"></Viewer>
@@ -80,4 +79,10 @@ const {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tooltip {
+    &+& {
+        @apply mt-2;
+    }
+}
+</style>
