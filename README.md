@@ -6,7 +6,9 @@
 
 pnpm build
 
-会生成.output文件夹，其中init.mjs用于迁移数据库用, 主要是这一点。
+会生成.output文件夹，其中migrate.mjs用于迁移数据库用, 主要是这一点。
+
+同时提供一个reset.mjs文件以供重置数据库(数据会丢失),因为修改了字段之后，deploy可能会失败，导致数据跟字段不一致，就会报错，数据没关系的话可以执行reset
 
 还要注意`.output\public\uploads`中上传的文件别删除了，这点需要修改一下。
 

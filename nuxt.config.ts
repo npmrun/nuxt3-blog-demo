@@ -23,11 +23,11 @@ export default defineNuxtConfig({
 	},
 	// 做成静态站点需要将动态路由静态化
 	// https://nuxt.com/docs/api/configuration/nuxt-config#generate
-	nitro: {
-		prerender: {
-			routes: ["/article/20"],
-		},
-	},
+	// nitro: {
+	// 	prerender: {
+	// 		routes: ["/article/20"],
+	// 	},
+	// },
 	experimental: {
 		payloadExtraction: false,
 	},

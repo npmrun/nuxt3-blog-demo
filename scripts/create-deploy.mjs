@@ -14,8 +14,12 @@ fs.copyFileSync(
 	".output/pm2-start.sh",
 );
 fs.copyFileSync(
-	path.resolve(__dirname, "../deployTemp/init.mjs"),
-	".output/init.mjs",
+	path.resolve(__dirname, "../deployTemp/migrate.mjs"),
+	".output/migrate.mjs",
+);
+fs.copyFileSync(
+	path.resolve(__dirname, "../deployTemp/reset.mjs"),
+	".output/reset.mjs",
 );
 
 // if (
