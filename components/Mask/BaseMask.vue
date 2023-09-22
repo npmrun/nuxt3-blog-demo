@@ -23,7 +23,7 @@ const porps = withDefaults(
 <style lang="scss" scoped>
 .loading-comp {
 	.loading-comp__mask {
-		background-color: rgba(255, 255, 255, 0.699);
+		background-color: rgba(199, 199, 199, 0.699);
 		position: absolute;
 		left: 0;
 		right: 0;
