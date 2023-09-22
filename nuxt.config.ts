@@ -31,7 +31,7 @@ export default defineNuxtConfig({
 	experimental: {
 		payloadExtraction: false,
 	},
-	css: ["~/assets/css/main.css"],
+	css: ["~/assets/css/main.css", "skeleton-elements/css"],
 	pinia: {
 		autoImports: ["defineStore", "acceptHMRUpdate"],
 	},
