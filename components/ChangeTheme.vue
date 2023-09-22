@@ -35,11 +35,7 @@ const themes = [
 </script>
 
 <template>
-	<select
-		id="theme"
-		v-model="colorMode.preference"
-		class="select max-w-xs select-sm"
-	>
+	<select id="theme" v-model="colorMode.preference" class="select max-w-xs select-sm">
 		<option disabled selected>Theme</option>
 		<option v-for="theme of themes" :key="theme">
 			{{ theme }}

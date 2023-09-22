@@ -3,11 +3,11 @@
 @tailwind utilities; */
 
 :root {
-	/* @apply bg-base-200; */
-	overflow-y: scroll;
+	@apply bg-base-200;
+	overflow-y: auto;
 	overflow-x: hidden;
 	height: 100%;
 }
-body {
+body, #__nuxt {
 	height: 100%;
 }
