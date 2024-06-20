@@ -6,17 +6,18 @@ import zhHans from "bytemd/locales/zh_Hans.json";
 import { Viewer } from "@/components/MdEditor";
 
 import { SkeletonBlock, SkeletonImage } from 'skeleton-elements/vue';
-import { stat } from "fs";
 
 definePageMeta({
     layout: "pure-layout",
 });
+let success = ref(false)
 
 const state = reactive({
     isEdit: false
 })
 
 const formState = reactive({
+    articleFileName: '',
     articleContent: ''
 })
 
@@ -33,25 +34,31 @@ function handleLoginSuccess() {
 async function handleQuit() {
     const { clear } = useUserSession();
     await clear();
+    state.isEdit = false
     useTo("退出成功");
 }
 
 function toggleEdit() {
     state.isEdit = !state.isEdit
-    if(state.isEdit && article.value !== null){
-        formState.articleContent = article.value
+    if (state.isEdit && article.value !== null) {
+        formState.articleContent = article.value.data
+        formState.articleFileName = article.value.fileName
     }
 }
 
 async function save() {
     const loadID = useNuxtApp().$toast.loading("保存中...")
-	await $fetch("/api/home", {
-		method: "POST",
-		body:  toRaw(formState)
-	})
-    useNuxtApp().$toast.remove(loadID)
-    useNuxtApp().$toast.success("保存成功")
-	nextTick(()=>{
+    await $fetch("/api/home", {
+        method: "POST",
+        body: toRaw(formState)
+    })
+    useNuxtApp().$toast.update(loadID, {
+        render: "保存成功",
+        type: "success",
+        isLoading: false,
+        autoClose: 1500
+    })
+    nextTick(() => {
         refresh()
     })
 }
@@ -64,8 +71,13 @@ const {
     error,
 } = useFetch("/api/home", {
     method: "GET",
-    query: {},
+    query: {}
+});
 
+const {
+    data: files,
+} = useFetch("/api/files", {
+    method: "GET"
 });
 </script>
 
@@ -73,16 +85,28 @@ const {
     <div class="max-w-[960px] mx-auto min-h-full py-8 flex flex-col">
         <div>
             <div v-if="loggedIn" class="mb-2">欢迎您, <span class="underline underline-offset-2 cursor-pointer">{{
-                user.nickname }}</span>阁下</div>
+                user.nickname }}</span>阁下，<span v-if="loggedIn" @click="handleQuit"
+                    class="underline underline-offset-2 cursor-pointer">注销</span></div>
             <ChangeLanguage class="mr-2"></ChangeLanguage>
             <ChangeTheme></ChangeTheme>
+            当前文件: {{ article?.fileName }}
         </div>
         <div class="my-5 h-full flex-grow relative" :style="{ height: state.isEdit ? '0' : '' }">
             <div class="absolute top-8 right-full mr-8">
-                <div class="tooltip tooltip-left" data-tip="切换文章">
-                    <button class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
-                        <Icon name="ph:article-medium-light" class="h-6 w-6"></Icon>
-                    </button>
+                <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="tooltip tooltip-left mb-1" data-tip="切换文章">
+                        <button class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
+                            <Icon name="ph:article-medium-light" class="h-6 w-6"></Icon>
+                        </button>
+                    </label>
+                    <div tabindex="0"
+                        class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-primary text-primary-content">
+                        <div class="card-body">
+                            <p v-for="item in files" class="cursor-pointer">
+                                {{ item}}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="absolute top-8 left-full ml-8">
@@ -93,28 +117,25 @@ const {
                 </div>
                 <template v-else>
                     <div v-if="state.isEdit" class="tooltip tooltip-right" data-tip="保存">
-                        <button @click="save"
-                            class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
+                        <button @click="save" class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
                             <Icon name="ic:round-save" class="h-6 w-6"></Icon>
                         </button>
                     </div>
                     <div v-if="!state.isEdit" class="tooltip tooltip-right" data-tip="编辑">
-                        <button @click="toggleEdit"
-                            class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
+                        <button @click="toggleEdit" class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
                             <Icon name="mingcute:edit-line" class="h-6 w-6"></Icon>
                         </button>
                     </div>
                     <div v-if="state.isEdit" class="tooltip tooltip-right" data-tip="退出编辑">
-                        <button @click="toggleEdit"
-                            class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
+                        <button @click="toggleEdit" class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
                             <Icon name="iconamoon:exit-light" class="h-6 w-6"></Icon>
                         </button>
                     </div>
-                    <div v-if="!state.isEdit" class="tooltip tooltip-right" data-tip="用户退出">
+                    <!-- <div v-if="!state.isEdit" class="tooltip tooltip-right" data-tip="用户退出">
                         <button @click="handleQuit" class="btn btn-square shadow bg-base-100 hover:bg-base-300 outline-1">
                             <Icon name="iconamoon:exit-light" class="h-6 w-6"></Icon>
                         </button>
-                    </div>
+                    </div> -->
                 </template>
             </div>
             <div class="rounded-lg bg-base-100 shadow-lg markdown-body"
@@ -138,7 +159,7 @@ const {
                         </MdEditorBaseMdEditor>
                     </div>
                     <div v-else class="p-5">
-                        <Viewer :plugins="[gfm(), frontmatter(), btybreaks()]" :locale="zhHans" :value="article"></Viewer>
+                        <Viewer :plugins="[gfm(), frontmatter(), btybreaks()]" :locale="zhHans" :value="article?.data"></Viewer>
                     </div>
                 </template>
             </div>

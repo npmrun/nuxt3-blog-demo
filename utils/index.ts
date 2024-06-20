@@ -2,6 +2,10 @@ export const inBrowser = process.client;
 export const isPrerender = process.env.NODE_ENV === "prerender";
 export const isDev = process.env.NODE_ENV === "development";
 
+export function isServerRender(){
+    return !!useNuxtApp().ssrContext
+}
+
 export function dateTimeFormat(
 	date: Date | string | number,
 	fmt = "yyyy-MM-dd HH:mm:ss",

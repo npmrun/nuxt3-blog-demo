@@ -4,6 +4,7 @@ import frontmatter from "@bytemd/plugin-frontmatter";
 import btybreaks from "@bytemd/plugin-breaks";
 import zhHans from "bytemd/locales/zh_Hans.json";
 import { Viewer } from "@/components/MdEditor";
+import Comment from "./ui/Comment.vue";
 definePageMeta({
 	layout: "main-layout",
 });
@@ -36,6 +37,13 @@ const {
 	pending,
 	error,
 } = useFetch("/api/article/article", {
+	// https://juejin.cn/post/7248118049583824952
+	// useFetch存在缓存数据，导致数据一致存在
+	key: "aaa"+Math.random(),
+	// server: false,
+	getCachedData(key, nuxtApp) {
+		return 
+	},
 	method: "GET",
 	query: {
 		id: route.params.id,
@@ -53,11 +61,13 @@ const {
 		return input?.data;
 	},
 });
-watchEffect(() => {
-	useHead({
+
+const computedTitle = computed(()=>{
+	return {
 		title: article.value?.title ?? "文章",
-	});
-});
+	}
+})
+useHead(computedTitle);
 
 const computedContent = computed(() => {
 	if (article.value?.content) {
@@ -122,8 +132,6 @@ const showRaw = ref(false);
 				></div>
 			</template>
 		</div>
-		<ClientOnly>
-			<div>sadas</div>
-		</ClientOnly>
+		<!-- <Comment/> -->
 	</div>
 </template>

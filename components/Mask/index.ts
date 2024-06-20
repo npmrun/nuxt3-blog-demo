@@ -1,4 +1,5 @@
-import { createVNode, render, App } from "vue";
+import { createVNode, render } from "vue";
+import type { App } from "vue";
 import LoadingConstructor from "./BaseMask.vue";
 
 function createElement(props = {}) {
@@ -13,7 +14,7 @@ function createElement(props = {}) {
 export default {
 	install(app: App) {
 		app.directive("loading", {
-			mounted(el: HTMLElement, binding) {
+			created(el: HTMLElement, binding) {
 				const { value: isAppend } = binding;
 				const text = el.getAttribute("loading-text");
 				el.removeAttribute("loading-text");
@@ -29,7 +30,7 @@ export default {
 				if (binding.value !== binding.oldValue) {
 					binding.value ? append(el) : remove(el);
 				}
-			},
+			}
 		});
 	},
 };
@@ -51,5 +52,5 @@ function remove(el: HTMLElement) {
 	// @ts-ignore
 	el.style.position = el._lastPosition;
 	// @ts-ignore
-	el.removeChild(el._element);
+	el._element && el.removeChild(el._element);
 }

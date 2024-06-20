@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, Ref, ref, watch } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
 import { Editor } from "bytemd";
+import type { Ref } from "vue"
 
 export default defineComponent({
 	props: {

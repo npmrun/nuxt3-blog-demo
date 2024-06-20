@@ -83,6 +83,8 @@ model Comment {
     content      String?
     article      Article        @relation(fields: [articleId], references: [id])
     articleId    Int
+    status       String         @default("NOTADUIT") // NOTADUIT 未审核 AUDITPASS 已通过 AUDITREJECT 已拒绝
+    reason       String?
     user         User           @relation(fields: [userId], references: [id])
     userId       Int
     createdAt    DateTime       @default(now())
@@ -92,18 +94,22 @@ model Comment {
 
 // 回复，有父子关系
 model ReplyComment {
-    id        Int     @id @default(autoincrement())
+    id        Int       @id @default(autoincrement())
     title     String
     content   String?
-    comment   Comment @relation(fields: [commentId], references: [id])
+    comment   Comment  @relation(fields: [commentId], references: [id])
     commentId Int
-    user      User    @relation(fields: [userId], references: [id])
+    status    String    @default("NOTADUIT") // NOTADUIT 未审核 AUDITPASS 已通过 AUDITREJECT 已拒绝
+    reason    String?
+    user      User      @relation(fields: [userId], references: [id])
     userId    Int
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
 
     // 父回复
     childComments  ReplyComment[] @relation(name: "ChildComments") // 子回复
-    replyComment   ReplyComment   @relation(name: "ChildComments", fields: [replyCommentId], references: [id])
-    replyCommentId Int
+    replyComment   ReplyComment?  @relation(name: "ChildComments", fields: [replyCommentId], references: [id])
+    replyCommentId Int?
 }
 
 // 配置表

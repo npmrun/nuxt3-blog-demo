@@ -3,7 +3,7 @@ export default defineNuxtConfig({
 	runtimeConfig: {
 		version: "0.0.1",
 		session: {
-			name: "nuxt-session",
+			name: "blog-session",
 			password: "",
 			// cookie:{ 
 			// 	// https://57code.gitee.io/nuxt3-docs-zh/usage/cookies.html#httponly
@@ -11,9 +11,13 @@ export default defineNuxtConfig({
 			// }
 		},
 	},
+	// typescript: {
+	// 	shim: false
+	// },
 	modules: [
 		"nuxt-icon",
 		"@pinia/nuxt",
+		'@pinia-plugin-persistedstate/nuxt',
 		"@nuxtjs/tailwindcss",
 		"@nuxtjs/color-mode",
 		"@nuxtjs/i18n",
@@ -32,9 +36,6 @@ export default defineNuxtConfig({
 		payloadExtraction: false,
 	},
 	css: ["~/assets/css/main.css", "skeleton-elements/css"],
-	pinia: {
-		autoImports: ["defineStore", "acceptHMRUpdate"],
-	},
 	i18n: {
 		strategy: "prefix_except_default",
 		defaultLocale: "zh",
@@ -42,7 +43,7 @@ export default defineNuxtConfig({
 		detectBrowserLanguage: {
 			useCookie: true,
 		},
-		lazy: true,
+		// lazy: true,
 		compilation: {
 			strictMessage: false,
 			escapeHtml: true,
@@ -74,10 +75,26 @@ export default defineNuxtConfig({
 		strict: true,
 	},
 	app: {
+		pageTransition: { name: 'page', mode: 'out-in' },
+		layoutTransition: { name: 'layout', mode: 'out-in' },
+		rootId: "__blog",
 		buildAssetsDir: "static",
 		head: {
+			meta: [
+				{ name: 'keywords', content: '前端, keywords' },
+				{ name: 'description', content: '博客' }
+			],
+			title: "棉木之屋",
 			// https://github.com/nuxt/nuxt/discussions/16109
 			script: [{ children: 'console.log("HELLO NUXT3");' }],
 		},
 	},
+	nitro: {
+		storage: {
+			data: {
+				driver: 'fs',
+				base: './.data/kv'
+			}
+		}
+	}
 });

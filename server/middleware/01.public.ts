@@ -65,7 +65,8 @@ export default eventHandler((event) => {
 		),
 	);
 
-	const file = resolve("public" + id);
+	const file = decodeURIComponent(resolve("public" + id));
+
 	if (fs.existsSync(file) && fs.statSync(file).isFile()) {
 		logger.debug("获取文件:", file);
 		return fsp.readFile(file);

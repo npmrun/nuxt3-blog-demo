@@ -1,6 +1,6 @@
-import { UserSession } from "~/server/utils/session";
+import type { UserSession } from "~/server/utils/session";
 const useUserSessionState = () =>
-	useState<UserSession>("nuxt-session", () => ({}));
+	useState<UserSession>("blog-session", () => ({}));
 
 export const useUserSession = () => {
 	const sessionState = useUserSessionState();
@@ -14,9 +14,12 @@ export const useUserSession = () => {
 };
 
 async function fetch() {
-	useUserSessionState().value = await useRequestFetch()("/api/session").catch(
-		() => ({}),
-	);
+	// https://github.com/Atinux/nuxt-auth-utils/issues/21
+	useUserSessionState().value = await useRequestFetch()('/api/session', {
+		headers: {
+			Accept: 'text/json'
+		}
+	}).catch(() => ({})) as any
 }
 
 async function clear() {

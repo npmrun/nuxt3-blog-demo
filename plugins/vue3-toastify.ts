@@ -2,7 +2,7 @@ import Vue3Toastify, { toast } from "vue3-toastify";
 import Mask from "@/components/Mask";
 import "vue3-toastify/dist/index.css";
 
-declare module "nuxt/dist/app/nuxt" {
+declare module "#app" {
 	interface NuxtApp {
 		$toast: typeof toast;
 	}

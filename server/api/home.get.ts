@@ -5,11 +5,18 @@ import path from "path"
 const handler = eventHandler(async (event: H3Event) => {
     let data = null
     try {
+        // const body = await readBody(event);
+        const query = await getQuery(event);
+        console.log(query);
+        
         if (process.env.NUXT_HOME_FOLDER) {
             let folder = process.env.NUXT_HOME_FOLDER.replace(/\$CWD/g, process.cwd())
             const storePath = path.resolve(folder, process.env.NUXT_HOME_FILE ?? 'README.md')
             await fs.ensureFile(storePath)
-            data = await fs.readFile(storePath, { encoding: "utf8" })
+            data = {
+                fileName: process.env.NUXT_HOME_FILE ?? 'README.md',
+                data: await fs.readFile(storePath, { encoding: "utf8" }),
+            }
         }
     } catch (error) {
         throw createError({

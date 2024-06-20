@@ -6,7 +6,10 @@ useHead({
 const props = defineProps<{
 	error: any;
 }>();
-console.log(props.error);
+
+// if(isServerRender()){
+// 	logger.error(props.error);
+// }
 
 const handleError = () => clearError({ redirect: "/" });
 </script>

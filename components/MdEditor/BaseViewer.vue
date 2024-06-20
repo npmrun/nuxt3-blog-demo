@@ -1,7 +1,7 @@
 <template>
 	<div
 		ref="markdownBody"
-		className="markdown-body"
+		className="markdown-body !text-current"
 		@click="handleClick"
 		v-html="file.toString()"
 	></div>
@@ -15,9 +15,9 @@ import {
 	onMounted,
 	onUnmounted,
 	ref,
-	Ref,
 	nextTick,
 } from "vue";
+import type { Ref } from "vue"
 import { getProcessor } from "bytemd";
 
 export default defineComponent({

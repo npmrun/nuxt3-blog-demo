@@ -6,7 +6,7 @@ export default eventHandler(async (event) => {
 			id: id
 		}
 	}) as any
-	if(newUser){
+	if (newUser) {
 		delete newUser.password
 	}
 	return {

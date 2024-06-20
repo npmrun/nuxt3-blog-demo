@@ -1,10 +1,10 @@
 > nuxt3 + prisma + ssr 示例
 
-## 啊飒沓的分身乏术阿术达撒士大夫
-阿术达
+## 昂发
+阿术达adsasdfsdfdsadasdasdasdfs
 为了部署写了一个脚本，主要是将环境跟运行脚本一起写进去
-
-pnpm build阿术达
+随风倒十分
+pnpm build阿术达aasda
 
 会生成.output文件夹，其中init.mjs用于迁移数据库用, 主要是这一点。
 

@@ -2,6 +2,7 @@ const delay = (t: number) => new Promise((resolve) => setTimeout(resolve, t));
 
 // https://prazdevs.github.io/pinia-plugin-persistedstate/zh/frameworks/nuxt-3.html
 export const useCounter = defineStore("counter", {
+	persist: true,
 	state: () => ({
 		n: 2,
 		incrementedTimes: 0,

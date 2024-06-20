@@ -71,9 +71,9 @@ export default eventHandler(async (event) => {
 			try {
 				fs.unlinkSync(filepath);
 			} catch (error) {
-				console.error("当前文件临时为:" + filepath);
-				console.error("删除失败，请知悉错误：");
-				console.error(error);
+				logger.error("当前文件临时为:" + filepath);
+				logger.error("删除失败，请知悉错误：");
+				logger.error(error);
 			}
 			const p = newPath.replace(/^public/, "").replace(/\\/g, "/");
 			result.avatar = p;
@@ -89,6 +89,7 @@ export default eventHandler(async (event) => {
 			data: result,
 		});
 	} catch (error) {
+		logger.debug(error)
 		return sendError(
 			event,
 			createError({

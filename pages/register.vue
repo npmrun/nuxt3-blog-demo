@@ -103,12 +103,13 @@ async function login() {
 					<!-- <button @click="notify">notify by click</button> -->
 					<!-- @submit.prevent -->
 					<form
-						class="max-w-sm p-10 m-auto rounded shadow-xl bg-white/25"
+						class="max-w-md p-10 m-auto rounded shadow-xl bg-white/25"
 						@submit.prevent="login"
 					>
 						<p class="mb-8 text-2xl font-light text-center">注册</p>
 						<div class="mb-2">
-							<div class="relative">
+							<div class="relative text-right flex text-right items-center gap-6">
+								<div class="w-[10%] min-w-[80px]">用户名: </div>
 								<input
 									id="login-with-bg-username"
 									v-model="formData.username"
@@ -120,7 +121,8 @@ async function login() {
 							</div>
 						</div>
 						<div class="mb-2">
-							<div class="relative">
+							<div class="relative text-right flex text-right items-center gap-6">
+								<div class="w-[10%] min-w-[80px]">{{ $t('login.email') }}: </div>
 								<input
 									id="login-with-bg-email"
 									v-model="formData.email"
@@ -132,7 +134,8 @@ async function login() {
 							</div>
 						</div>
 						<div class="mb-2">
-							<div class="relative">
+							<div class="relative flex text-right items-center gap-6">
+								<div class="w-[10%] min-w-[80px]">{{ $t('login.password') }}: </div>
 								<input
 									id="login-with-bg-password"
 									v-model="formData.password"
@@ -144,14 +147,15 @@ async function login() {
 							</div>
 						</div>
 						<div class="mb-2">
-							<div class="relative">
+							<div class="relative text-right flex items-center gap-6">
+								<div class="w-[10%] min-w-[80px]">重复密码: </div>
 								<input
 									id="login-with-bg-repeatPassword"
 									v-model="formData.repeatPassword"
 									type="text"
 									name="repeatPassword"
 									class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-									placeholder="再次输入密码"
+									placeholder="重复密码"
 								/>
 							</div>
 						</div>

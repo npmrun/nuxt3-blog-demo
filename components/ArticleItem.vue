@@ -25,7 +25,8 @@ const emit = defineEmits<{
 			</span>
 		</div>
 		<div class="text-sm mt-2 px-2 py-1 bg-base-300 inline-block rounded-xl">
-			<span> 作者：{{ article.author?.nickname ?? "佚名" }} </span>
+			
+			<span> 作者：<img class="w-[35px] h-[35px] rounded-full object-cover inline-block" :src="article.author?.avatar" alt=""> {{ article.author?.nickname ?? "佚名" }} </span>
 		</div>
 		<div
 			class="line-clamp-2 leading-4 mt-3 cursor-pointer text-[#8895a6]"

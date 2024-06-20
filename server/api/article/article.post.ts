@@ -4,20 +4,34 @@
  */
 
 import matter from "gray-matter";
+import { z } from "zod";
+
+const schema = z.object({
+	id: z.coerce.number({
+		required_error: 'id必须填写',
+		invalid_type_error: "id字段无效类型",
+	}).optional(),
+	title: z.string(),
+	content: z.string(),
+	published: z.boolean(),
+})
 
 export default defineEventHandler(async (event) => {
+
+	const result = await readValidatedBody(event, (data) => schema.safeParse(data))
+	if (!result.success) {
+		throw sendError(event, createError({
+			statusCode: 500,
+			data: result.error.issues,
+			statusMessage: result.error.issues.map(v => v.message).join(",")
+		}))
+	}
+
+	const { title, content, published, id } = result.data;
+
 	const prisma = event.context.prisma;
 	const { user } = await requireUserSession(event);
-	const body = await readBody(event);
 
-	const { title, content, published, id } = body;
-
-	if (!title || !content) {
-		return sendError(
-			event,
-			createError({ statusCode: 400, statusMessage: "Invalid params" })
-		);
-	}
 	const parseMD = matter(content);
 	const desc =
 		parseMD.data.desc ??

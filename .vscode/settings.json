@@ -8,6 +8,7 @@
 	"i18n-ally.sourceLanguage": "zh",
 	"i18n-ally.displayLanguage": "zh",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
-	}
+		"source.fixAll.eslint": "explicit"
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }

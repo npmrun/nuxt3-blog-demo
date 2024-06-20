@@ -1,6 +1,6 @@
 {
-	"extends": "../.nuxt/tsconfig.server.json",
 	"compilerOptions": {
-		"allowSyntheticDefaultImports": true
-	}
+		"allowJs": false
+	},
+	"extends": "../.nuxt/tsconfig.server.json"
 }

@@ -7,14 +7,17 @@ async function handleQuit() {
 	await clear();
 	useTo("退出成功");
 }
+
+function toHome() {
+	naivigatePush("/home")
+}
 </script>
 
 <template>
-	<div
-		class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex"
-	>
+	<div class="h-full">
+		<div class="fixed top-0 left-0 bottom-0 w-[40%] justify-center bg-base-200 hidden sm:flex">
 		<div class="text-center pt-[30%]">
-			<div class="avatar mb-4">
+			<div class="avatar mb-4 cursor-pointer" @click="toHome">
 				<div class="w-24 mask mask-hexagon">
 					<img src="https://xieyaxin.top/me.jpeg" />
 				</div>
@@ -50,53 +53,39 @@ async function handleQuit() {
 						</button>
 					</template>
 					<template v-else>
-						<NuxtLink
-							v-if="!loggedIn"
-							:to="getLocalePath('/login')"
-						>
-							<button class="btn btn-sm">登陆</button>
+						<NuxtLink v-if="!loggedIn" :to="getLocalePath('/login')">
+							<button class="btn btn-sm shadow-none">登陆</button>
 						</NuxtLink>
 					</template>
 				</ul>
 			</div>
 		</div>
 		<!-- <Bg></Bg> -->
-		<canvas
-			id="snow"
-			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"
-		></canvas>
+		<canvas id="snow"
+			class="absolute filter brightness-[.8] w-full h-full overflow-hidden pointer-events-none"></canvas>
 	</div>
 	<main class="ml-[40%] wrap-outer">
 		<div
-			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10"
-		>
-			<NuxtLink
-				to="/"
-				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
-			>
+			class="h-[50px] border-b flex items-center px-[35px] text-sm font-bold sticky top-0 bg-base-100 shadow-sm z-10">
+			<NuxtLink :to="getLocalePath('/')" class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
 				首页
 			</NuxtLink>
-			<NuxtLink
-				to="/articles"
-				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
-			>
+			<NuxtLink :to="getLocalePath('/articles')"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
 				文章
 			</NuxtLink>
-			<NuxtLink
-				to="/snippet"
-				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
-			>
+			<NuxtLink :to="getLocalePath('/snippet')"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
 				代码片段
 			</NuxtLink>
-			<NuxtLink
-				to="/about"
-				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200"
-			>
+			<NuxtLink :to="getLocalePath('/about')"
+				class="rounded-xl inline-block px-5 py-2 cursor-pointer hover:bg-base-200">
 				关于
 			</NuxtLink>
 		</div>
 		<slot />
 	</main>
+	</div>
 </template>
 
 <style lang="scss" scoped>

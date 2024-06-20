@@ -8,7 +8,10 @@ const handler = eventHandler(async (event: H3Event) => {
 	// https://nuxt.com/modules/session
 	// console.log(event.context);
 	// console.log(event.context.sessions && Object.keys(event.context.sessions));
-
+	// await useStorage("data").setItem('test:foo', { hello: 'w23234222orld' })
+	// await useStorage("data").setItem('test:foo', { hello: 'w23234222orld' })
+	console.log(await useStorage("data").getItem('test:foo'));
+	
 	try {
 		await prisma.$queryRaw`SELECT 1;`;
 	} catch (error) {

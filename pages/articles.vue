@@ -20,7 +20,7 @@ const pageQuery = ref({
 });
 watchEffect(() => {
 	if (route.query.page) {
-		pageQuery.value.pageNum = +route.query.page ?? 1;
+		pageQuery.value.pageNum = +route.query.page;
 	}
 });
 watch(
@@ -30,6 +30,9 @@ watch(
 	},
 );
 
+if(useNuxtApp().isHydrating){
+	console.log(22);
+}
 const { data: articleData, pending } = useFetch("/api/article/articles", {
 	query: pageQuery,
 	default() {
@@ -46,8 +49,9 @@ const { data: articleData, pending } = useFetch("/api/article/articles", {
 	},
 }) as any;
 
-function toDetail(record: any) {
-	router.push(localePath("/article/" + record.id));
+async function toDetail(record: any) {
+	await router.push(localePath("/article/" + record.id));
+	console.log("success");
 }
 
 const allCount = computed(() => {

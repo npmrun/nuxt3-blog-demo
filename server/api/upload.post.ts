@@ -8,8 +8,10 @@ export default defineEventHandler(async (event) => {
 	await requireUserSession(event);
 	const BaseUrl = await getConfigByKey(event, ESiteConfig.BaseUrl);
 	const {
+		// @ts-ignore
 		file: [{ filepath, mimetype, originalFilename }],
 	} = await readFiles(event, {
+		// @ts-ignore
 		includeFields: false,
 	});
 
@@ -22,7 +24,7 @@ export default defineEventHandler(async (event) => {
 		"_" +
 		originalFilename.split(".").slice(0, -1).join("");
 
-	const newPath = `${path.join("public", "uploads", imageName)}.${
+	const newPath = `${encodeURIComponent(path.join("public", "uploads", imageName))}.${
 		mimetype.split("/")[1]
 	}`;
 
@@ -32,9 +34,9 @@ export default defineEventHandler(async (event) => {
 	try {
 		fs.unlinkSync(filepath);
 	} catch (error) {
-		console.error("当前文件临时为:" + filepath);
-		console.error("删除失败，请知悉错误：");
-		console.error(error);
+		logger.error("当前文件临时为:" + filepath);
+		logger.error("删除失败，请知悉错误：");
+		logger.error(error);
 	}
 	const base = BaseUrl?.value ?? event.node.req.headers.origin;
 	return {
